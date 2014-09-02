@@ -18,6 +18,10 @@ namespace Wenzil.Console
 			database.Add(command, new CommandInfo(description, usage, callback));
 		}
 
+		public static void RegisterCommand(string command, ConsoleCommand callback) {
+			database.Add(command, new CommandInfo("", "", callback));
+		}
+
 		public static bool HasCommand(string command)
 		{
 			return database.ContainsKey(command);
