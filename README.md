@@ -22,7 +22,6 @@ public class CustomCommands : MonoBehaviour
     {
         ConsoleCommandsDatabase.RegisterCommand("HELP", CustomCommands.Help);
         ConsoleCommandsDatabase.RegisterCommand("QUIT", CustomCommands.Quit);
-        ConsoleCommandsDatabase.RegisterCommand("SPAWN", CustomCommands.Spawn);
     }
 
     private static string Help(params string[] args)
