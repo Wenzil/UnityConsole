@@ -34,14 +34,14 @@ public class CustomCommands : MonoBehaviour
     {
         Application.Quit();
         
-\#if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Application.isEditor)
             UnityEditor.EditorApplication.isPlaying = false;
-\#endif
+#endif
 
         return "Quitting...";
     }
-```csharp
+```
 
 ## World space UI
 You can use UnityConsole in world space too! Simply set your Canvas Render Mode to World Space and you're good to go. You may need to scale down the Canvas.
