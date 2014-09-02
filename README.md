@@ -56,4 +56,5 @@ You can easily change the appearance of the Console by changing the image source
 ## Get in touch
 
 Feel free to report any issues you may find right here on Github!
+
 @Syncopath1 on Twitter
