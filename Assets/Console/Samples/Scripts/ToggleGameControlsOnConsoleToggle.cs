@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Wenzil.Console;
 
 /// <summary>
 /// A special utility class that revokes user controls whenever the Console is open. Very game-specific.
@@ -23,10 +24,10 @@ public class ToggleGameControlsOnConsoleToggle : MonoBehaviour
 
     private void ToggleMouseLook(bool isConsoleOpen)
     {
-        if (mouseLook != null)
+        if(mouseLook != null)
             mouseLook.enabled = !isConsoleOpen;
 
-        if (wasdMovement != null)
+        if(wasdMovement != null)
             wasdMovement.enabled = !isConsoleOpen;
     }
 }
