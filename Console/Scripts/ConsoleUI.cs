@@ -84,6 +84,7 @@ namespace Wenzil.Console
 			isConsoleOpen = open;
 			enabled = open;
 			togglableContent.interactable = open;
+            togglableContent.blocksRaycasts = open;
 			togglableContent.alpha = open ? onAlpha : 0f;
 
 			ClearInput();

@@ -33,27 +33,31 @@ public class CustomCommands : MonoBehaviour
 	/// </summary>
 	private static string Spawn(params string[] args)
 	{
-        string name = "New GameObject";
-        PrimitiveType primitiveType = PrimitiveType.Cube;
+        string name;
+        PrimitiveType primitiveType;
         GameObject spawned;
         
-        if(args.Length >= 2)
+        if(args.Length < 2)
+        {
+            return Help("SPAWN");
+		}
+        else
         {
             name = args[0];
-			try 
+            try
             {
-				primitiveType = (PrimitiveType) Enum.Parse(typeof(PrimitiveType), args[1], true);
-			}
-			catch 
+                primitiveType = (PrimitiveType) Enum.Parse(typeof(PrimitiveType), args[1], true);
+            }
+            catch
             {
-				return "Invalid primitive type specified: " + args[1];
-			}
-		}
+                return "Invalid primitive type specified: " + args[1];
+            }
 
-		spawned = GameObject.CreatePrimitive(primitiveType);
-		spawned.name = name;
-		spawned.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
-		return "Spawned a new " + primitiveType + " named: " + name;
+            spawned = GameObject.CreatePrimitive(primitiveType);
+            spawned.name = name;
+            spawned.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+            return "Spawned a new " + primitiveType + " named: " + name;
+        }
 	}
 
     /// <summary>
