@@ -9,7 +9,6 @@ public class CustomCommands : MonoBehaviour
 {
 	void Start()
 	{
-		
 		ConsoleCommandsDatabase.RegisterCommand("QUIT", "Quits the application.", "QUIT", CustomCommands.Quit);
         ConsoleCommandsDatabase.RegisterCommand("SPAWN", "Spawn a new game object from the given name and primitve type in front of the main camera. See PrimitiveType.", "SPAWN [name] [primitiveType]", CustomCommands.Spawn);
         ConsoleCommandsDatabase.RegisterCommand("HELP", "Displays help information for the given command.", "HELP [command]", CustomCommands.Help);
@@ -67,11 +66,11 @@ public class CustomCommands : MonoBehaviour
             return Help("HELP");
 
         // if we got it right, get help about the given command
-        string commandToGetHelpAbout = args[0];
+        string commandToGetHelpAbout = args[0].ToUpper();
 		ConsoleCommand found;
 		if(ConsoleCommandsDatabase.TryGetCommand(commandToGetHelpAbout, out found))
-            return string.Format("Help information for {0}\n\r\tDescription: {1}\n\r\tUsage: {2}", commandToGetHelpAbout.ToUpper(), found.description, found.usage);
+            return string.Format("Help information about {0}\n\r\tDescription: {1}\n\r\tUsage: {2}", commandToGetHelpAbout, found.description, found.usage);
 		else
-			return string.Format("Command not found: {0}", commandToGetHelpAbout.ToUpper());
+			return string.Format("Cannot find help information about {0}. Are you sure it is a valid command?", commandToGetHelpAbout);
 	}
 }
