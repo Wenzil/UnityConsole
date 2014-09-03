@@ -70,7 +70,7 @@ public class CustomCommands : MonoBehaviour
         string commandToGetHelpAbout = args[0];
 		ConsoleCommand found;
 		if(ConsoleCommandsDatabase.TryGetCommand(commandToGetHelpAbout, out found))
-			return string.Format("{0}\n\r\t{1}", found.description, found.usage);
+            return string.Format("Help information for {0}\n\r\tDescription: {1}\n\r\tUsage: {2}", commandToGetHelpAbout.ToUpper(), found.description, found.usage);
 		else
 			return string.Format("Command not found: {0}", commandToGetHelpAbout.ToUpper());
 	}
