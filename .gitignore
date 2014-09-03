@@ -39,8 +39,6 @@ Icon
 
 !*.unitypackage
 !.gitignore
-!ProjectSettings/
 
-!Assets/
 !LICENSE.txt
 !README.md
