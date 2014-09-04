@@ -111,17 +111,19 @@ namespace Wenzil.Console
 
 		public void ClearInput()
 		{
-			SetInput("");
+			SetInputText("");
 		}
 
-		public void SetInput(string input) 
+		public void SetInputText(string input) 
         {
+            inputField.MoveTextStart(false);
 			inputField.value = input;
+            inputField.MoveTextEnd(false);
 		}
 
 		public void ActivateInputField()
 		{
-			EventSystemManager.currentSystem.SetSelectedGameObject(scrollbar.gameObject, null);
+			EventSystemManager.currentSystem.SetSelectedGameObject(scrollbar.gameObject, null); // selecting the scrollbar seems to enable scrolling
 			EventSystemManager.currentSystem.SetSelectedGameObject(inputField.gameObject, null);
 			inputField.OnPointerClick(null);
 		}
