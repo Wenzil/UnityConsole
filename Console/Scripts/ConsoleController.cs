@@ -15,8 +15,14 @@ namespace Wenzil.Console
 		public ConsoleUI ui;
 		public KeyCode toggleKey = KeyCode.BackQuote;
 		public bool closeOnEscape = false;
+        public int inputHistoryCapacity = 20;
 
-        private ConsoleInputHistory inputHistory = new ConsoleInputHistory(5);
+        private ConsoleInputHistory inputHistory;
+
+        void Awake()
+        {
+            inputHistory = new ConsoleInputHistory(inputHistoryCapacity);
+        }
 
 		void OnEnable()
 		{
