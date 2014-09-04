@@ -51,6 +51,7 @@ You can easily change the appearance of the Console by changing the image source
 ## Known Issues
 - The input field sometimes randomly loses focus
 - The console output text overflows its rectangle when viewed from behind in World Space render mode
+- Modifying Time.timeScale will mess up input field reactivation when submitting a command or reopening the console. See [this hack](http://www.reddit.com/r/Unity3D/comments/2f8y2e/easytouse_developer_console_built_with_the_new_ui/ck7qmkr) for a temporary fix. 
 
 ## Get in touch
 
