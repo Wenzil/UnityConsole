@@ -123,15 +123,16 @@ namespace Wenzil.Console
 
 		public void ActivateInputField()
 		{
-			EventSystemManager.currentSystem.SetSelectedGameObject(scrollbar.gameObject, null); // selecting the scrollbar seems to enable scrolling
-			EventSystemManager.currentSystem.SetSelectedGameObject(inputField.gameObject, null);
-			inputField.OnPointerClick(null);
+			EventSystem.current.SetSelectedGameObject(scrollbar.gameObject); // selecting the scrollbar seems to enable scrolling
+			EventSystem.current.SetSelectedGameObject(inputField.gameObject);
+
+            inputField.ActivateInputField();
 		}
 
 		public void DeactivateInputField()
 		{
-			if (EventSystemManager.currentSystem != null) // necessary when console is being destroyed as a result of app shutdown
-				EventSystemManager.currentSystem.SetSelectedGameObject(null, null);
+            if (EventSystem.current != null) // necessary when console is being destroyed as a result of app shutdown
+                EventSystem.current.SetSelectedGameObject(null, null);
 		}
 	}
 }
