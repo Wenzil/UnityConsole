@@ -21,7 +21,6 @@ namespace UnityConsole
         /// </summary>
         public static event Action onClear;
 
-
         /// <summary>
         /// Parses the given command input and executes it with the parsed arguments.
         /// </summary>
@@ -34,7 +33,7 @@ namespace UnityConsole
             string[] args = parts.Skip(1).ToArray();
             string response = TryExecuteCommand(command, args);
 
-            Console.Log("> " + input);
+            Console.Log("<i>> " + input + "</i>");
             Console.Log(response);
             return response;
         }
@@ -48,8 +47,8 @@ namespace UnityConsole
         public static string ExecuteCommand(string command, params string[] args)
         {
             string response = TryExecuteCommand(command, args);
-            
-            Console.Log("> " + command + string.Join(" ", args));
+
+            Console.Log("<i>> " + command + string.Join(" ", args) + "</i>");
             Console.Log(response);
             return response;
         }

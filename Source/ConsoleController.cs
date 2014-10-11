@@ -7,6 +7,7 @@ namespace UnityConsole
 	/// </summary>
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(ConsoleUI))]
+    [AddComponentMenu("UnityConsole/Console Controller")]
 	public class ConsoleController : MonoBehaviour
 	{
         /// <summary>
@@ -17,12 +18,12 @@ namespace UnityConsole
         /// <summary>
         /// The keyboard shortcut for opening and closing the console.
         /// </summary>
-		public KeyCode toggleKey = KeyCode.BackQuote;
+		public KeyCode toggleKey = KeyCode.Tab;
 
         /// <summary>
         /// Determines whether or not to close the console when pressing the Escape key on the keyboard.
         /// </summary>
-		public bool closeOnEscape = false;
+		public bool closeOnEscape = true;
 
         /// <summary>
         /// The maximum capacity for the console input history. Older input entries will be thrown away.
@@ -55,6 +56,7 @@ namespace UnityConsole
             ui.AddNewOutputEntry(message);
         }
 
+        [ContextMenu("Clear Console")]
         private void OnClear()
         {
             ui.ClearOutput();
@@ -70,25 +72,25 @@ namespace UnityConsole
 		void Update()
 		{
             if (Input.GetKeyDown(toggleKey))
-                ui.ToggleConsole();
+                ui.Toggle();
             else if (Input.GetKeyDown(KeyCode.Escape) && closeOnEscape)
-                ui.ToggleConsole(false);
-            else if (Input.GetKeyDown(KeyCode.UpArrow) && ui.isConsoleOpen)
+                ui.Toggle(false);
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && ui.isOpen)
                 NavigateInputHistoryUp();
-            else if (Input.GetKeyDown(KeyCode.DownArrow) && ui.isConsoleOpen)
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && ui.isOpen)
                 NavigateInputHistoryDown();
 		}
 
         private void NavigateInputHistoryUp()
         {
             string navigatedToInput = inputHistory.NavigateUp();
-            ui.SetInputText(navigatedToInput);
+            ui.SetInput(navigatedToInput);
         }
 
         private void NavigateInputHistoryDown()
         {
             string navigatedToInput = inputHistory.NavigateDown();
-            ui.SetInputText(navigatedToInput);
+            ui.SetInput(navigatedToInput);
         }
     }
 }

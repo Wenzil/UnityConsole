@@ -4,6 +4,7 @@ using System.Collections;
 /// <summary>
 /// Very basic player controls.
 /// </summary>
+[AddComponentMenu("UnityConsole/Examples/WASD Movement")]
 public class WASDMovement : MonoBehaviour
 {
     public float speed = 1;
@@ -12,7 +13,9 @@ public class WASDMovement : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.Space))
+            direction += Vector3.forward;
+        else if (Input.GetKey(KeyCode.W))
             direction += Vector3.forward;
         if (Input.GetKey(KeyCode.S))
             direction += Vector3.back;

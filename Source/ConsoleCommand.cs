@@ -28,9 +28,9 @@
 		public string description { get; private set; }
 
         /// <summary>
-        /// Syntax information for the command arguments (if any). The general syntax for a Command is
-        ///     Command arg0 arg1 ... argN
-        /// Arguments (if any) are separated by whitespace. Optional arguments are usually placed at the end.
+        /// Syntax information for the command arguments (if any). The general syntax for a command is
+        ///     COMMAND arg0 arg1 arg2...
+        /// Optional arguments are usually placed at the end.
         /// </summary>
 		public string syntax { get; private set; }
 
@@ -44,5 +44,10 @@
 			this.description = description;
 			this.syntax = syntax;
 		}
+
+        public override string ToString()
+        {
+            return name + " - " + description;
+        }
 	}
 }

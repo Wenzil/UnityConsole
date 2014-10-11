@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace UnityConsole
 {
     /// <summary>
-    /// An exception thrown when attempting to retrieve or execute a command that does not exist.
+    /// An exception thrown when attempting to retrieve a command that does not exist.
     /// </summary>
     [Serializable]
     public class NoSuchCommandException : Exception

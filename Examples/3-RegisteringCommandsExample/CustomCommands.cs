@@ -6,6 +6,7 @@ using UnityConsole;
 /// A few custom commands being registered with the console. Simply need to add this script to the Console game object.
 /// </summary>
 [DisallowMultipleComponent]
+[AddComponentMenu("UnityConsole/Examples/Custom Commands")]
 public class CustomCommands : MonoBehaviour
 {
     void Start()

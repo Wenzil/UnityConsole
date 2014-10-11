@@ -3,6 +3,7 @@
 /// <summary>
 /// Centers and hides the mouse cursor. Useful in conjunction with MouseLook and world space UI.
 /// </summary>
+[AddComponentMenu("UnityConsole/Examples/Lock Default Cursor")]
 public class LockDefaultCursor : MonoBehaviour
 {
 	void Update() 

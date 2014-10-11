@@ -4,7 +4,8 @@ using UnityConsole;
 /// <summary>
 /// A special utility class that revokes user controls whenever the console is open. Very game-specific.
 /// </summary>
-public class ToggleGameControlsOnConsoleToggle : MonoBehaviour
+[AddComponentMenu("UnityConsole/Examples/Toggle Game Controls On Toggle Console")]
+public class ToggleGameControlsOnToggleConsole : MonoBehaviour
 {
     public ConsoleUI console;
     public MouseLook mouseLook;
@@ -13,7 +14,7 @@ public class ToggleGameControlsOnConsoleToggle : MonoBehaviour
     void OnEnable()
     {
         console.onToggle += ToggleMouseLook;
-        ToggleMouseLook(console.isConsoleOpen);
+        ToggleMouseLook(console.isOpen);
     }
 
     void OnDisable()

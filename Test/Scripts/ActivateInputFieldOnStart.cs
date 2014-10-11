@@ -1,18 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UnityConsole;
 
-public class ActivateInputFieldOnStart : MonoBehaviour
+[AddComponentMenu("UnityConsole/Test/Activate Input Field On Start")]
+public class ActivateInputFieldOnStart : MonoBehaviour 
 {
-    public InputField inputField;
+    public ActivateInputFieldAction action;
 
 	void Start() 
     {
-        Invoke("ActivateInputField", 0.1f);
+        action.Execute();
 	}
-	
-    private void ActivateInputField()
-    {
-        inputField.ActivateInputField();
-    }
 }
