@@ -1,20 +1,18 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace UnityConsole
 {
-	/// <summary>
-	/// Static representation of the console. Use Console.Log() anywhere in your code to log messages.
-	/// </summary>
-	public static class Console
-	{
+    /// <summary>
+    /// Static representation of the console. Use Console.Log() anywhere in your code to log messages.
+    /// </summary>
+    public static class Console
+    {
         /// <summary>
         /// Occurs whenever a new message is logged.
         /// </summary>
-		public static event Action<string> onLog;
+        public static event Action<string> onLog;
 
         /// <summary>
         /// Occurs whenever the console is cleared.
@@ -33,7 +31,7 @@ namespace UnityConsole
             string[] args = parts.Skip(1).ToArray();
             string response = TryExecuteCommand(command, args);
 
-            Console.Log("<i>> " + input + "</i>");
+            Console.Log("> " + input);
             Console.Log(response);
             return response;
         }
@@ -48,7 +46,7 @@ namespace UnityConsole
         {
             string response = TryExecuteCommand(command, args);
 
-            Console.Log("<i>> " + command + string.Join(" ", args) + "</i>");
+            Console.Log("> " + command + string.Join(" ", args));
             Console.Log(response);
             return response;
         }
@@ -57,7 +55,7 @@ namespace UnityConsole
         {
             try
             {
-                ConsoleCommand toExecute = ConsoleCommandsDatabase.GetCommand(command);
+                Command toExecute = CommandDatabase.GetCommand(command);
                 return toExecute.callback(args);
             }
             catch (NoSuchCommandException noSuchCommandException)
@@ -85,5 +83,5 @@ namespace UnityConsole
             if (onClear != null)
                 onClear();
         }
-	}
+    }
 }

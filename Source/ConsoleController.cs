@@ -2,28 +2,28 @@
 
 namespace UnityConsole
 {
-	/// <summary>
-	/// The behavior of the console.
-	/// </summary>
-	[DisallowMultipleComponent]
-	[RequireComponent(typeof(ConsoleUI))]
+    /// <summary>
+    /// The behaviour of the console.
+    /// </summary>
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(ConsoleUI))]
     [AddComponentMenu("UnityConsole/Console Controller")]
-	public class ConsoleController : MonoBehaviour
-	{
+    public class ConsoleController : MonoBehaviour
+    {
         /// <summary>
         /// The visual component of the console.
         /// </summary>
-		public ConsoleUI ui;
+        public ConsoleUI ui;
 
         /// <summary>
         /// The keyboard shortcut for opening and closing the console.
         /// </summary>
-		public KeyCode toggleKey = KeyCode.Tab;
+        public KeyCode toggleKey = KeyCode.Tab;
 
         /// <summary>
         /// Determines whether or not to close the console when pressing the Escape key on the keyboard.
         /// </summary>
-		public bool closeOnEscape = true;
+        public bool closeOnEscape = true;
 
         /// <summary>
         /// The maximum capacity for the console input history. Older input entries will be thrown away.
@@ -37,19 +37,19 @@ namespace UnityConsole
             inputHistory = new ConsoleInputHistory(inputHistoryCapacity);
         }
 
-		void OnEnable()
-		{
-			Console.onLog += OnLog;
+        void OnEnable()
+        {
+            Console.onLog += OnLog;
             Console.onClear += OnClear;
-			ui.onSubmitInput += OnSubmitInput;
-		}
+            ui.onSubmitInput += OnSubmitInput;
+        }
 
-		void OnDisable()
-		{
-			Console.onLog -= OnLog;
+        void OnDisable()
+        {
+            Console.onLog -= OnLog;
             Console.onClear -= OnClear;
-			ui.onSubmitInput -= OnSubmitInput;
-		}
+            ui.onSubmitInput -= OnSubmitInput;
+        }
 
         private void OnLog(string message)
         {
@@ -69,8 +69,8 @@ namespace UnityConsole
             inputHistory.AddNewInputEntry(input);
         }
 
-		void Update()
-		{
+        void Update()
+        {
             if (Input.GetKeyDown(toggleKey))
                 ui.Toggle();
             else if (Input.GetKeyDown(KeyCode.Escape) && closeOnEscape)
@@ -79,7 +79,7 @@ namespace UnityConsole
                 NavigateInputHistoryUp();
             else if (Input.GetKeyDown(KeyCode.DownArrow) && ui.isOpen)
                 NavigateInputHistoryDown();
-		}
+        }
 
         private void NavigateInputHistoryUp()
         {

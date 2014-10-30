@@ -6,8 +6,8 @@ public class ActivateInputFieldOnStart : MonoBehaviour
 {
     public ActivateInputFieldAction action;
 
-	void Start() 
+    void Start() 
     {
         action.Execute();
-	}
+    }
 }

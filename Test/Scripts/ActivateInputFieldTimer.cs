@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
 
 [AddComponentMenu("UnityConsole/Test/Activate Input Field Timer")]
 public class ActivateInputFieldTimer : MonoBehaviour 
@@ -8,10 +9,10 @@ public class ActivateInputFieldTimer : MonoBehaviour
     public float time = 1;
     public ActivateInputFieldAction action;
 
-	void OnEnable()
+    void OnEnable()
     {
         StartCoroutine("Timer");
-	}
+    }
 
     void OnDisable()
     {

@@ -1,37 +1,38 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
-using System;
+using UnityConsole.Internal;
 
 namespace UnityConsole
 {
-	/// <summary>
-	/// The visual component of the console.
-	/// </summary>
-	[DisallowMultipleComponent]
+    /// <summary>
+    /// The visual component of the console.
+    /// </summary>
+    [DisallowMultipleComponent]
     [AddComponentMenu("UnityConsole/Console UI")]
-	public class ConsoleUI : MonoBehaviour
-	{
+    public class ConsoleUI : MonoBehaviour
+    {
         /// <summary>
         /// Occurs when the console is opened or closed.
         /// </summary>
-		public event Action<bool> onToggle;
+        public event Action<bool> onToggle;
 
         /// <summary>
         /// Occurs when an input entry is submitted by the user.
         /// </summary>
-		public event Action<string> onSubmitInput;
+        public event Action<string> onSubmitInput;
 
         /// <summary>
         /// The scrollbar used for scrolling the console output.
         /// </summary>
-		public Scrollbar scrollbar;
+        public Scrollbar scrollbar;
 
         /// <summary>
         /// The input field used for typing commands into the console input.
         /// </summary>
-		public InputField inputField;
+        public InputField inputField;
 
         /// <summary>
         /// The scrollable area for the console output.
@@ -44,6 +45,11 @@ namespace UnityConsole
         public Text outputText;
 
         /// <summary>
+        /// Whether or not to activate the console input when opening the console.
+        /// </summary>
+        public bool activateInputFieldOnToggle = true;
+
+        /// <summary>
         /// Indicates whether the console is currently open or close.
         /// </summary>
         public bool isOpen { get; private set; }
@@ -51,13 +57,11 @@ namespace UnityConsole
         void Awake()
         {
             Show(false);
-            Show(true);
-            Show(false); // have to hide twice because hiding UI elements from Awake() sometimes fails
         }
 
         void OnEnable()
         {
-            this.Invoke(Toggle, true, .1f); // have to delay toggle because activating an input field has no effect when invoked from initialization methods
+            Toggle(true);
         }
 
         void OnDisable()
@@ -68,31 +72,31 @@ namespace UnityConsole
         /// <summary>
         /// Opens or closes the console.
         /// </summary>
-		public void Toggle()
-		{
-			Toggle(!isOpen);
-		}
+        public void Toggle()
+        {
+            Toggle(!isOpen);
+        }
 
         /// <summary>
         /// Opens or closes the console.
         /// </summary>
         /// <param name="open">Indicates whether to open or close the console</param>
-		public void Toggle(bool open)
-		{
+        public void Toggle(bool open)
+        {
             bool toggled = isOpen != open;
-			isOpen = open;
+            isOpen = open;
+
+            Show(open);
 
             if (toggled && !open)
                 ClearInput();
 
-            Show(open);
-
-			if(toggled && open)
+            if(toggled && open && activateInputFieldOnToggle)
                 ActivateInputField();
 
-			if(toggled && onToggle != null)
-				onToggle(open);
-		}
+            if(toggled && onToggle != null)
+                onToggle(open);
+        }
 
         private void Show(bool show)
         {
@@ -102,20 +106,18 @@ namespace UnityConsole
         }
 
         /// <summary>
-        /// Clears/reactivates the console input and scrolls to the bottom of the console output. Also relays the user submitted input to interested listeners.
+        /// Clears/reactivates the console input, scrolls to the bottom of the console output and triggers the OnSubmitInput event.
         /// </summary>
         public void OnSubmitInput(string input)
         {
-            if (input.Length > 0)
-            {
-                if (onSubmitInput != null)
-                    onSubmitInput(input);
-                ClearInput();
-                scrollbar.value = 0;
-            }
+            if (string.IsNullOrEmpty(input))
+                return;
 
-            // have to delay reactivation because unity's implementation of InputField seems to deactivate it right after all OnSubmit delegates return
-            this.Invoke(ActivateInputField, .1f);
+            ClearInput();
+            ActivateInputField();
+            scrollbar.value = 0;
+            if (onSubmitInput != null)
+                onSubmitInput(input);
         }
 
         /// <summary>
@@ -131,20 +133,20 @@ namespace UnityConsole
         /// <summary>
         /// Clears the console input.
         /// </summary>
-		public void ClearInput()
-		{
-			SetInput("");
-		}
+        public void ClearInput()
+        {
+            SetInput("");
+        }
 
         /// <summary>
         /// Writes the given string into the console input, ready to be user submitted.
         /// </summary>
-		public void SetInput(string input) 
+        public void SetInput(string input) 
         {
             inputField.MoveTextStart(false);
-			inputField.value = input;
+            inputField.value = input;
             inputField.MoveTextEnd(false);
-		}
+        }
 
         /// <summary>
         /// Selects and highlights the text in the console input
