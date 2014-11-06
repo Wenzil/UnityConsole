@@ -26,15 +26,19 @@ using UnityConsole;
 Static representation of the console.
 
 ### Console.onLog
+
 ```static event Action<string> onLog```
+
 Occurs whenever a new message is logged.
 ```csharp
 // Invoke SomeMethod() whenever a new message is logged
-Console.onLog += () => DoSomethingWhenNewMessageIsLogged();
+Console.onLog += () => SomeMethod();
 ```
 
 ### Console.onClear
+
 ```static event Action<string> onClear```
+
 Occurs whenever the console is cleared.
 ```csharp
 // Invoke SomeMethod() whenever the console is cleared
@@ -42,27 +46,39 @@ Console.onLog += () => SomeMethod();
 ```
 
 ### Console.Log
+
 ```static void Log(string message)```
+
 Logs the given message.
 ```csharp
 Console.Log("This message will show up in the console output.");
 ```
 
 ### Console.Clear
+
 ```static void Clear()```
+
 Clears the console.
 ```csharp
 Console.Clear();
 ```
 
 ### Console.ExecuteCommand
+
 ```static string ExecuteCommand(string input)```
+
 Parses the given command input and executes it with the parsed arguments.
+
 **input** The raw command input string for the command (may contain arguments to be parsed)
+
 **Returns** The command response
 
 ```static string ExecuteCommand(string command, params string[] args)```
+
 Executes the given command with the given command arguments.
+
 **command** The name of the command to execute
+
 **args** The command arguments
+
 **Returns** The command response
