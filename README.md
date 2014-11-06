@@ -15,10 +15,10 @@ Alternatively, download and import one of the following unity packages:
 ## Getting Started
 1. Add a UI canvas to your scene if you don't already have one (GameObject > UI > Canvas)
 2. Drag-and-Drop the UnityConsole prefab onto the Canvas in the Hierarchy
-3. Run your scene and press TAB to toggle the Console
+3. Run your scene and press TAB to toggle the console
 
 ## Logging
-Anywhere in your code, simply use ```Console.Log()``` to output to the Console.
+Anywhere in your code, simply use ```Console.Log()``` to output to the console.
 
 ## Built-in Commands
 UnityConsole comes with 3 default commands.
@@ -38,7 +38,7 @@ The console input ignores case and expects arguments to be separated by whitespa
 UnityConsole allows you to define your own commands. Commands defined in static methods can be elegantly registered with the console:
 
 1. Create a static method compatible with the ```string Command.Callback(string[] args)``` delegate signature
-2. Apply the [Command] attribute to the method, specifying the command name, description and syntax
+2. Apply the ```[Command]``` attribute to the method, specifying the command name, description and syntax
 
 ```csharp
 using UnityConsole;
@@ -55,10 +55,10 @@ public class StaticCommandExample
 }
 ```
 
-Since the command is static and is decorated with the [Command] attribute, it will be registered with the console automatically at runtime.
+Since the command is static and is decorated with the ```[Command]``` attribute, it will be registered with the console automatically at runtime.
 
 ## Registering Late Bound Commands
-Non-static commands need to be registered manually at runtime. It can be done at any point, hence the term "late bound". A good place to do it is the Start() method of a script.
+Non-static commands need to be registered manually at runtime. It can be done at any point, hence the term "late bound". A good place to do it is within the Start() method of a script.
 
 ```csharp
 using UnityConsole;
@@ -89,7 +89,7 @@ Unlike static commands, late bound commands allow for direct dependencies on gam
 You can use the console in world space too! Simply set your Canvas Render Mode to World Space and you're good to go. You may need to scale down the Canvas. In the future, I want to implement great VR support. There's an alpha VR demo [available here](http://wenzil.github.io/UnityConsole/).
 
 ## Appearance
-You can easily change the appearance of the console by changing the images, colors, font styles and state transitions used by the UI elements. It is also possible to anchor the Console to any side of the screen.
+You can easily change the appearance of the console by changing the images, colors, font styles and state transitions used by the UI elements. It is also possible to anchor the console to any side of the screen.
 
 ## API Reference
 Quite a bit more information and code samples can be found in the [UnityConsole API Reference](http://wenzil.github.io/UnityConsole/).
