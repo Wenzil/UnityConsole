@@ -64,26 +64,26 @@ Non-static commands need to be registered manually at runtime. It can be done at
 using UnityConsole;
 
 public class LateBoundCommandExample : MonoBehaviour
+{
+    // Notice the direct dependency on the UI Canvas in the scene.
+    public Canvas UI;
+
+    // Manually register our late bound command at the start of the game or whenever this object is initialized
+    void Start()
     {
-        // Notice the direct dependency on the UI Canvas in the scene.
-        public Canvas UI;
-
-        // Manually register our late bound command at the start of the game or whenever this object is initialized
-        void Start()
-        {
-            CommandDatabase.RegisterCommand("TOGGLE_UI", ToggleUI, "Toggles the UI visibility", "TOGGLE_UI");
-        }
-
-        // Define a command whose job is to toggle the UI visibility. Notice that the method is not static and we don't need to apply the [Command] attribute for late bound commands.
-        public string ToggleUI(params string[] args)
-        {
-            UI.enabled = !UI.enabled;
-            return "UI visibility turned " + (UI.enabled ? "on" : "off");
-        }
+        CommandDatabase.RegisterCommand("TOGGLE_UI", ToggleUI, "Toggles the UI visibility", "TOGGLE_UI");
     }
+
+    // Define a command whose job is to toggle the UI visibility.
+    public string ToggleUI(params string[] args)
+    {
+        UI.enabled = !UI.enabled;
+        return "UI visibility turned " + (UI.enabled ? "on" : "off");
+    }
+}
 ```
 
-Unlike static commands, late bound commands allow for direct dependencies on gameobjects in the scene. This is sometimes useful.
+Unlike static commands, late bound commands allow for direct dependencies on gameobjects in the scene. 
 
 ## World space UI
 You can use the console in world space too! Simply set your Canvas Render Mode to World Space and you're good to go. You may need to scale down the Canvas. In the future, I want to implement great VR support. There's an alpha VR demo [available here](http://wenzil.github.io/UnityConsole/).
@@ -92,7 +92,7 @@ You can use the console in world space too! Simply set your Canvas Render Mode t
 You can easily change the appearance of the console by changing the images, colors, font styles and state transitions used by the UI elements. It is also possible to anchor the Console to any side of the screen.
 
 ## API Reference
-Quite a bit more information and code samples can be found in the [UnityConsole API Reference]((http://wenzil.github.io/UnityConsole/).
+Quite a bit more information and code samples can be found in the [UnityConsole API Reference](http://wenzil.github.io/UnityConsole/).
 
 ## Known Issues
 - Console input gets deactivated and submitted when, after the console is opened, the mouse cursor moves for the first time. See [this bug submission](http://issuetracker.unity3d.com/issues/input-field-selection-is-immediately-deactivated-after-moving-mouse)
@@ -102,4 +102,5 @@ Quite a bit more information and code samples can be found in the [UnityConsole 
 
 ## Get in touch
 [@Syncopath1 on Twitter](https://twitter.com/Syncopath1)
+
 [Syncopath on Reddit](http://www.reddit.com/user/Syncopath)
