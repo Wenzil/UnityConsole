@@ -8,12 +8,13 @@
 
   <!-- Flatdoc -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.6/legacy.js'></script>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.6/flatdoc.js'></script>
+  <script src='flatdoc/v/0.8.6/legacy.js'></script>
+  <script src='flatdoc/v/0.8.6/flatdoc.js'></script>
+  
 
   <!-- Flatdoc theme -->
-  <link  href='http://rstacruz.github.io/flatdoc/v/0.8.6/theme-white/style.css' rel='stylesheet'>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.6/theme-white/script.js'></script>
+  <link  href='flatdoc/v/0.8.6/theme-white/style.css' rel='stylesheet'>
+  <script src='flatdoc/v/0.8.6/theme-white/script.js'></script>
 
   <!-- Meta -->
   <meta content="UnityConsole" property="og:title">
@@ -22,7 +23,7 @@
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('Wenzil/UnityConsole')
+      fetcher: Flatdoc.github('Wenzil/UnityConsole', 'REFERENCE.md?ref=develop')
     });
   </script>
 </head>
