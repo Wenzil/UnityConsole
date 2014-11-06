@@ -9,7 +9,7 @@ namespace UnityConsole.Examples
     {
         public ConsoleUI console;
         public MouseLook mouseLook;
-        public WASDMovement wasdMovement;
+        public KeyboardController keyboardController;
 
         void OnEnable()
         {
@@ -28,8 +28,8 @@ namespace UnityConsole.Examples
             if (mouseLook != null)
                 mouseLook.enabled = !isConsoleOpen;
 
-            if (wasdMovement != null)
-                wasdMovement.enabled = !isConsoleOpen;
+            if (keyboardController != null)
+                keyboardController.enabled = !isConsoleOpen;
         }
     }
 }

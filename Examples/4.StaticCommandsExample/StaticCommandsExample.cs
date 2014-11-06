@@ -10,7 +10,7 @@ namespace UnityConsole.Examples
     {
         // Define a command named HELLO whose job is to output "HELLO WORLD". Comment out the [ExcludeCommand] attribute to actually include this command in your build.
         [ExcludeCommand]
-        [Command("HELLO", Description = "Outputs \"HELLO WORLD\".", Syntax = "HELLO")]
+        [Command("HELLO", description = "Outputs \"HELLO WORLD\".", syntax = "HELLO")]
         private static string Hello(params string[] args)
         {
             // the return value is the command output
@@ -19,7 +19,7 @@ namespace UnityConsole.Examples
 
         // Define a command named SPAWN whose job is to spawn primitive game objects. Comment out the [ExcludeCommand] attribute to actually include this command in your build.
         [ExcludeCommand]
-        [Command("SPAWN", Description = "Spawns a new primitive game object with the given name and primitve type.", Syntax = "SPAWN name primitiveType")]
+        [Command("SPAWN", description = "Spawns a new primitive game object with the given name and primitve type.", syntax = "SPAWN name primitiveType")]
         private static string Spawn(params string[] args)
         {
             // If we got the syntax wrong, simply display help information about SPAWN
@@ -52,7 +52,7 @@ namespace UnityConsole.Examples
 
         // Define a command named KILL whose job is to destroy the specified game objects. Comment out the [ExcludeCommand] attribute to actually include this command in your build.
         [ExcludeCommand]
-        [Command("KILL", Description = "Kills the game object with the given name (case sensitive).", Syntax = "KILL name")]
+        [Command("KILL", description = "Kills the game object with the given name (case sensitive).", syntax = "KILL name")]
         private static string Kill(params string[] args)
         {
             // If we got the syntax wrong, symply display help information about KILL

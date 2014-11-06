@@ -18,7 +18,7 @@ namespace UnityConsole.Examples
             CommandDatabase.RegisterCommand("TOGGLE_UI", ToggleUI, "Toggles the UI visibility", "TOGGLE_UI");
         }
 
-        // Define a command whose job is to toggle the UI visibility. Notice that we don't need to apply the CommandAttribute attribute for late bound commands.
+        // Define a command whose job is to toggle the UI visibility. Notice that we don't need to apply the [Command] attribute for late bound commands.
         public string ToggleUI(params string[] args)
         {
             UI.enabled = !UI.enabled;
