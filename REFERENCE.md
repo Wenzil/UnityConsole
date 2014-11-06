@@ -6,8 +6,11 @@ Below you will find the reference documentation for UnityConsole complete with c
 Clone the [UnityConsole repository](https://github.com/Wenzil/UnityConsole) and put the root directory into your Assets folder.
 
 Alternatively, download and import one of the following unity packages:
+
 - [UnityConsoleWithExampleScenes](http://wenzil.github.io/UnityConsole/) which includes useful step-by-step learning examples
+
 - [UnityConsoleVRDemoAlpha](http://wenzil.github.io/UnityConsole/)  which includes a basic demo for early stage VR support
+
 - [UnityConsoleMinimal](http://wenzil.github.io/UnityConsole/) which includes nothing but the necessary UnityConsole components
 
 # Getting Started
