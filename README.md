@@ -2,7 +2,7 @@ UnityConsole
 ===============
 Welcome to UnityConsole, an easy-to-use developer console for Unity 4.6!
 
-![Screenshot](https://dl.dropboxusercontent.com/u/106740647/UnityConsole/Screenshot1_0.jpg)
+![Screenshot](https://dl.dropboxusercontent.com/u/106740647/UnityConsole/ScreenshotCropped.jpg)
 
 ## Installation
 Clone this repository and put the UnityConsole directory into your Assets folder.
