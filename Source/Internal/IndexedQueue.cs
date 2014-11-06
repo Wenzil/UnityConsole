@@ -8,7 +8,7 @@ namespace UnityConsole.Internal
     /// <remarks>
     /// Enqueue, Dequeue and lookup are all O(1) operations thanks to the circular array implementation. This is useful for input history navigation.
     /// </remarks>
-    public class IndexedQueue<T>
+    internal class IndexedQueue<T>
     {
         private T[] array;
         private int capacity;

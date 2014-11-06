@@ -43,6 +43,9 @@
             this.syntax = syntax;
         }
 
+        /// <summary>
+        /// Returns a string representation of the command in the format: name - description
+        /// </summary>
         public override string ToString()
         {
             return name + " - " + description;

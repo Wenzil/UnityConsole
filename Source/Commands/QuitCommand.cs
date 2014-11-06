@@ -10,7 +10,7 @@ namespace UnityConsole.Commands
         /// <summary>
         /// Quits the application.
         /// </summary>
-        [Command("QUIT", Description = "Quits the application.", Syntax = "QUIT", Override = false)]
+        [Command("QUIT", description = "Quits the application.", syntax = "QUIT", overrideRegistered = false)]
         public static string Quit(params string[] args)
         {
             Application.Quit();

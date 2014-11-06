@@ -10,7 +10,7 @@ namespace UnityConsole.Commands
         /// <summary>
         /// Displays the list of available commands.
         /// </summary>
-        [Command("COMMANDS", Description = "Displays the list of available commands.", Syntax = "COMMANDS", Override = false)]
+        [Command("COMMANDS", description = "Displays the list of available commands.", syntax = "COMMANDS", overrideRegistered = false)]
         public static string Commands(params string[] args)
         {
             var commands = from commandName in CommandDatabase.commandNames

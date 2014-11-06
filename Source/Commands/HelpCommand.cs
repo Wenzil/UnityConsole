@@ -8,7 +8,7 @@
         /// <summary>
         /// Displays general syntax information or specific command usage.
         /// </summary>
-        [Command("HELP", Description = "Displays general syntax information or specific command usage.", Syntax = "HELP [command]", Override = false)]
+        [Command("HELP", description = "Displays general syntax information or specific command usage.", syntax = "HELP [command]", overrideRegistered = false)]
         public static string Help(params string[] args)
         {
             // if no command argument, display general help information

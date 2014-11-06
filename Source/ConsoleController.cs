@@ -10,24 +10,26 @@ namespace UnityConsole
     [AddComponentMenu("UnityConsole/Console Controller")]
     public class ConsoleController : MonoBehaviour
     {
-        /// <summary>
-        /// The visual component of the console.
-        /// </summary>
-        public ConsoleUI ui;
+        // The visual component of the console.
+        [SerializeField]
+        private ConsoleUI ui;
 
         /// <summary>
         /// The keyboard shortcut for opening and closing the console.
         /// </summary>
+        [SerializeField]
         public KeyCode toggleKey = KeyCode.Tab;
 
         /// <summary>
         /// Determines whether or not to close the console when pressing the Escape key on the keyboard.
         /// </summary>
+        [SerializeField]
         public bool closeOnEscape = true;
 
         /// <summary>
         /// The maximum capacity for the console input history. Older input entries will be thrown away.
         /// </summary>
+        [SerializeField]
         public int inputHistoryCapacity = 100;
 
         private ConsoleInputHistory inputHistory;
@@ -37,14 +39,14 @@ namespace UnityConsole
             inputHistory = new ConsoleInputHistory(inputHistoryCapacity);
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             Console.onLog += OnLog;
             Console.onClear += OnClear;
             ui.onSubmitInput += OnSubmitInput;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             Console.onLog -= OnLog;
             Console.onClear -= OnClear;

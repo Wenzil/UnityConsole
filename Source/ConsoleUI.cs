@@ -24,29 +24,26 @@ namespace UnityConsole
         /// </summary>
         public event Action<string> onSubmitInput;
 
-        /// <summary>
-        /// The scrollbar used for scrolling the console output.
-        /// </summary>
-        public Scrollbar scrollbar;
+        // The scrollbar used for scrolling the console output.
+        [SerializeField]
+        private Scrollbar scrollbar;
+
+        // The input field used for typing commands into the console input.
+        [SerializeField]
+        private InputField inputField;
+
+        // The scrollable area for the console output.
+        [SerializeField]
+        private ScrollRect outputArea;
+
+        // The text element displaying the console output.
+        [SerializeField]
+        private Text outputText;
 
         /// <summary>
-        /// The input field used for typing commands into the console input.
+        /// Indicates whether or not to activate the console input when opening the console.
         /// </summary>
-        public InputField inputField;
-
-        /// <summary>
-        /// The scrollable area for the console output.
-        /// </summary>
-        public ScrollRect outputArea;
-
-        /// <summary>
-        /// The text element displaying the console output.
-        /// </summary>
-        public Text outputText;
-
-        /// <summary>
-        /// Whether or not to activate the console input when opening the console.
-        /// </summary>
+        [SerializeField]
         public bool activateInputFieldOnToggle = true;
 
         /// <summary>
@@ -54,17 +51,17 @@ namespace UnityConsole
         /// </summary>
         public bool isOpen { get; private set; }
 
-        void Awake()
+        private void Awake()
         {
             Show(false);
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             Toggle(true);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             Toggle(false); 
         }

@@ -8,7 +8,7 @@ namespace UnityConsole.Internal
     /// <summary>
     /// Some reflection utilities that can be AOT compiled (and are therefore available at runtime).
     /// </summary>
-    public class RuntimeReflectionUtilities
+    internal class RuntimeReflectionUtilities
     {
         /// <summary>
         /// The assemblies to reflect upon.

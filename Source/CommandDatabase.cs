@@ -18,7 +18,7 @@ namespace UnityConsole
         /// </summary>
         public static IEnumerable<string> commandNames { get { return database.Keys.OrderBy(name => name); } }
 
-        // Find all static methods decorated with the CommandAttribute attribute and register them
+        // Find all static methods decorated with the [Command] attribute and register them
         static CommandDatabase()
         {
 
@@ -31,7 +31,7 @@ namespace UnityConsole
                 {
                     CommandAttribute commandAttribute = (CommandAttribute) method.GetCustomAttributes(typeof(CommandAttribute), false)[0];
                     Command.Callback commandCallback = (Command.Callback) Delegate.CreateDelegate(typeof(Command.Callback), method);
-                    RegisterCommand(commandAttribute.Name, commandCallback, commandAttribute.Description, commandAttribute.Syntax, commandAttribute.Override);
+                    RegisterCommand(commandAttribute.name, commandCallback, commandAttribute.description, commandAttribute.syntax, commandAttribute.overrideRegistered);
                 }
                 catch (ArgumentException)
                 {
@@ -40,7 +40,7 @@ namespace UnityConsole
             }
         }
 
-        // Find all static methods decorated with the CommandAttribute attribute
+        // Find all static methods decorated with the [Command] attribute
         private static IEnumerable<MethodInfo> GetAllStaticCommands()
         {
             var bindingFlags = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly;
