@@ -1,29 +1,22 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// Static representation of the console. Use Console.Log() anywhere in your code to log messages.
-    /// </summary>
+    [Summary("Static representation of the console. Use Console.Log() anywhere in your code to log messages.")]
     public static class Console
     {
-        /// <summary>
-        /// Occurs whenever a new message is logged.
-        /// </summary>
+        [Summary("Occurs whenever a new message is logged.")]
         public static event Action<string> onLog;
 
-        /// <summary>
-        /// Occurs whenever the console is cleared.
-        /// </summary>
+        [Summary("Occurs whenever the console is cleared.")]
         public static event Action onClear;
 
-        /// <summary>
-        /// Parses the given command input and executes it with the parsed arguments.
-        /// </summary>
-        /// <param name="input">The raw command input string for the command (may contain arguments to be parsed)</param>
-        /// <returns>The command response</returns>
+        [Summary("Parses the given command input and executes it with the parsed arguments.")]
+        [Parameter("input", "The raw command input string for the command (may contain arguments to be parsed)")]
+        [Returns("The command response")]
         public static string ExecuteCommand(string input)
         {
             string[] parts = input.Split(' ');
@@ -36,12 +29,10 @@ namespace UnityConsole
             return response;
         }
 
-        /// <summary>
-        /// Executes the given command with the given command arguments.
-        /// </summary>
-        /// <param name="command">The name of the command to execute</param>
-        /// <param name="args">The command arguments</param>
-        /// <returns>The command response</returns>
+        [Summary("Executes the given command with the given command arguments.")]
+        [Parameter("command", "The name of the command to execute")]
+        [Parameter("args", "The command arguments")]
+        [Returns("The command response")]
         public static string ExecuteCommand(string command, params string[] args)
         {
             string response = TryExecuteCommand(command, args);
@@ -64,9 +55,7 @@ namespace UnityConsole
             }
         }
 
-        /// <summary>
-        /// Logs the given message.
-        /// </summary>
+        [Summary("Logs the given message.")]
         public static void Log(string message)
         {
             Debug.Log(message);
@@ -74,9 +63,7 @@ namespace UnityConsole
                 onLog(message);
         }
 
-        /// <summary>
-        /// Clears the console.
-        /// </summary>
+        [Summary("Clears the console.")]
         public static void Clear()
         {
             Debug.ClearDeveloperConsole();

@@ -1,15 +1,12 @@
 ﻿using System.Linq;
+using CSharpDocumentation;
 
 namespace UnityConsole.Commands
 {
-    /// <summary>
-    /// A definition for the COMMANDS command.
-    /// </summary>
+    [Summary("A definition for the COMMANDS command.")]
     public static class CommandsCommand
     {
-        /// <summary>
-        /// Displays the list of available commands.
-        /// </summary>
+        [Summary("Displays the list of available commands.")]
         [Command("COMMANDS", description = "Displays the list of available commands.", syntax = "COMMANDS", overrideRegistered = false)]
         public static string Commands(params string[] args)
         {

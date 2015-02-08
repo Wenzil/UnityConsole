@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
+using CSharpDocumentation;
 
 namespace UnityConsole.Commands
 {
-    /// <summary>
-    /// A definition for the QUIT command.
-    /// </summary>
+    [Summary("A definition for the QUIT command.")]
     public static class QuitCommand
     {
-        /// <summary>
-        /// Quits the application.
-        /// </summary>
+        [Summary("Quits the application.")]
         [Command("QUIT", description = "Quits the application.", syntax = "QUIT", overrideRegistered = false)]
         public static string Quit(params string[] args)
         {

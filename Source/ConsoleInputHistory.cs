@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityConsole.Internal;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// Utility for caching and navigating recently executed console commands.
-    /// </summary>
-    /// <remarks>
-    /// When initiating navigation up (after a new input entry was submitted or the console was cleared), we navigate to the last submitted input entry. 
-    /// When initiating navigation down (after a new input entry was submitted or the console was cleared), we navigate BELOW the last submitted input entry.
-    /// When navigating up, we navigate ABOVE the last navigated-to input entry.
-    /// When navigating down, we navigate BELOW the last navigated-to input entry.
-    /// </remarks>
+    [Summary("Utility for caching and navigating recently executed console commands.")]
+    [Remarks("When initiating navigation up (after a new input entry was submitted or the console was cleared), we navigate to the last submitted input entry. \nWhen initiating navigation down (after a new input entry was submitted or the console was cleared), we navigate BELOW the last submitted input entry. \nWhen navigating up, we navigate ABOVE the last navigated-to input entry. \nWhen navigating down, we navigate BELOW the last navigated-to input entry.")]
     public class ConsoleInputHistory
     {
         // Input history from most newest to oldest
@@ -28,18 +22,14 @@ namespace UnityConsole
         // The most recently navigated-to input entry.
         private int lastNavigatedToInputEntry;
 
-        /// <summary>
-        /// Constructs the console input history with the given maximum capacity.
-        /// </summary>
+        [Summary("Constructs the console input history with the given maximum capacity.")]
         public ConsoleInputHistory(int maxCapacity)
         {
             inputHistory = new IndexedQueue<string>(maxCapacity);
         }
 
-        /// <summary>
-        /// Navigate (or initiate navigation) up the input history
-        /// </summary>
-        /// <returns>The navigated-to input entry</returns>
+        [Summary("Navigate (or initiate navigation) up the input history")]
+        [Returns("The navigated-to input entry")]
         public string NavigateUp()
         {
             if (!isNavigating && !inputHistory.IsEmpty)
@@ -50,10 +40,8 @@ namespace UnityConsole
             return validateLastNavigatedToInputEntry();
         }
 
-        /// <summary>
-        /// Navigate (or initiate navigation) down the input history
-        /// </summary>
-        /// <returns>The navigated-to input entry</returns>
+        [Summary("Navigate (or initiate navigation) down the input history")]
+        [Returns("The navigated-to input entry")]
         public string NavigateDown()
         {
             if (!isNavigating && !inputHistory.IsEmpty)
@@ -85,9 +73,7 @@ namespace UnityConsole
                 return "";
         }
 
-        /// <summary>
-        /// Adds a new input entry to the input history.
-        /// </summary>
+        [Summary("Adds a new input entry to the input history.")]
         public void AddNewInputEntry(string input)
         {
             // store whether the last navigated-to input entry is about to get obsolete for being too old
@@ -120,9 +106,7 @@ namespace UnityConsole
             isNavigating = false;
         }
 
-        /// <summary>
-        /// Clears the input history and resets its navigation.
-        /// </summary>
+        [Summary("Clears the input history and resets its navigation.")]
         public void Clear()
         {
             inputHistory.Clear();

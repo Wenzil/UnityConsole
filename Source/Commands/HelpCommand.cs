@@ -1,13 +1,11 @@
-﻿namespace UnityConsole.Commands
+﻿using CSharpDocumentation;
+
+namespace UnityConsole.Commands
 {
-    /// <summary>
-    /// A definition for the HELP command.
-    /// </summary>
+    [Summary("A definition for the HELP command.")]
     public static class HelpCommand
     {
-        /// <summary>
-        /// Displays general syntax information or specific command usage.
-        /// </summary>
+        [Summary("Displays general syntax information or specific command usage.")]
         [Command("HELP", description = "Displays general syntax information or specific command usage.", syntax = "HELP [command]", overrideRegistered = false)]
         public static string Help(params string[] args)
         {

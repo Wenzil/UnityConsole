@@ -1,40 +1,28 @@
-﻿namespace UnityConsole 
+﻿using CSharpDocumentation;
+
+namespace UnityConsole 
 {
-    /// <summary>
-    /// Command information and execution callback.
-    /// </summary>
+    [Summary("Command information and execution callback.")]
     public struct Command 
     {
-        /// <summary>
-        /// The command execution callback signature.
-        /// </summary>
-        /// <param name="args">The command arguments</param>
-        /// <returns>The command response</returns>
+        [Summary("The command execution callback signature.")]
+        [Parameter("args", "The command arguments")]
+        [Returns("The command response")]
         public delegate string Callback(params string[] args);
 
-        /// <summary>
-        /// The label that refers to the command. Can be used from the console input to execute the command. 
-        /// </summary>
+        [Summary("The label that refers to the command. Can be used from the console input to execute the command. ")]
         public string name { get; private set; }
 
-        /// <summary>
-        /// The command execution callback, i.e. the method to call when the command is executed.
-        /// </summary>
+        [Summary("The command execution callback, i.e. the method to call when the command is executed.")]
         public Command.Callback callback { get; private set; }
 
-        /// <summary>
-        /// A short description describing what the command does.
-        /// </summary>
+        [Summary("A short description describing what the command does.")]
         public string description { get; private set; }
 
-        /// <summary>
-        /// Syntax information for the command arguments.
-        /// </summary>
+        [Summary("Syntax information for the command arguments.")]
         public string syntax { get; private set; }
 
-        /// <summary>
-        /// Constructs a ConsoleCommand with the given name, execution callback, description and syntax information.
-        /// </summary>
+        [Summary("Constructs a Command with the given name, execution callback, description and syntax information.")]
         public Command(string name, Command.Callback callback, string description, string syntax) : this()
         {
             this.name = name;
@@ -43,9 +31,7 @@
             this.syntax = syntax;
         }
 
-        /// <summary>
-        /// Returns a string representation of the command in the format: name - description
-        /// </summary>
+        [Summary("Returns a string representation of the command in the format: name - description")]
         public override string ToString()
         {
             return name + " - " + description;

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Serialization;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// An exception thrown when a static command has an invalid method signature
-    /// </summary>
+    [Summary("An exception thrown when a static command has an invalid method signature")]
     [Serializable]
     public class InvalidCommandSignatureException : Exception
     {
-        /// <summary>
-        /// The command with the invalid method signature.
-        /// </summary>
+        [Summary("The command with the invalid method signature.")]
         public MethodInfo command { get; private set; }
 
         public InvalidCommandSignatureException() : base() { }
@@ -30,9 +27,7 @@ namespace UnityConsole
                 this.command = (MethodInfo) info.GetValue("command", typeof(MethodInfo));
         }
 
-        /// <summary>
-        /// Perform serialization. Not part of the public API.
-        /// </summary>
+        [Summary("Perform serialization. Not part of the public API.")]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

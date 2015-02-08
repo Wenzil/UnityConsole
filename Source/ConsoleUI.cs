@@ -4,24 +4,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityConsole.Internal;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// The visual component of the console.
-    /// </summary>
+    [Summary("The visual component of the console.")]
     [DisallowMultipleComponent]
     [AddComponentMenu("UnityConsole/Console UI")]
     public class ConsoleUI : MonoBehaviour
     {
-        /// <summary>
-        /// Occurs when the console is opened or closed.
-        /// </summary>
+        [Summary("Occurs when the console is opened or closed.")]
         public event Action<bool> onToggle;
 
-        /// <summary>
-        /// Occurs when an input entry is submitted by the user.
-        /// </summary>
+        [Summary("Occurs when an input entry is submitted by the user.")]
         public event Action<string> onSubmitInput;
 
         // The scrollbar used for scrolling the console output.
@@ -40,16 +35,12 @@ namespace UnityConsole
         [SerializeField]
         private Text outputText;
 
-        /// <summary>
-        /// Indicates whether or not to activate the console input when opening the console.
-        /// </summary>
+        [Summary("Indicates whether or not to activate the console input when opening the console.")]
         [SerializeField]
-        public bool activateInputFieldOnToggle = true;
-
-        /// <summary>
-        /// Indicates whether the console is currently open or close.
-        /// </summary>
-        public bool isOpen { get; private set; }
+        public bool activateInputFieldOnOpen = true;
+        
+        [Summary("Indicates whether the console is currently open or close.")]
+        public bool isOpen { get { return enabled; } }
 
         private void Awake()
         {
@@ -58,40 +49,25 @@ namespace UnityConsole
 
         private void OnEnable()
         {
-            Toggle(true);
+            OnToggle(true);
         }
 
         private void OnDisable()
         {
-            Toggle(false); 
+            OnToggle(false);
         }
 
-        /// <summary>
-        /// Opens or closes the console.
-        /// </summary>
-        public void Toggle()
+        private void OnToggle(bool open)
         {
-            Toggle(!isOpen);
-        }
-
-        /// <summary>
-        /// Opens or closes the console.
-        /// </summary>
-        /// <param name="open">Indicates whether to open or close the console</param>
-        public void Toggle(bool open)
-        {
-            bool toggled = isOpen != open;
-            isOpen = open;
-
             Show(open);
 
-            if (toggled && !open)
+            if (!open)
                 ClearInput();
 
-            if(toggled && open && activateInputFieldOnToggle)
+            if (open && activateInputFieldOnOpen)
                 ActivateInputField();
 
-            if(toggled && onToggle != null)
+            if (onToggle != null)
                 onToggle(open);
         }
 
@@ -102,11 +78,28 @@ namespace UnityConsole
             scrollbar.gameObject.SetActive(show);
         }
 
-        /// <summary>
-        /// Clears/reactivates the console input, scrolls to the bottom of the console output and triggers the OnSubmitInput event.
-        /// </summary>
+        [Summary("Opens or closes the console.")]
+        public void Toggle()
+        {
+            enabled = !enabled;
+        }
+
+        [Summary("Opens the console.")]
+        public void Open()
+        {
+            enabled = true;
+        }
+
+        [Summary("Closes the console.")]
+        public void Close()
+        {
+            enabled = false;
+        }
+
+        [Summary("Clears/reactivates the console input, scrolls to the bottom of the console output and triggers the onSubmitInput event.")]
         public void OnSubmitInput(string input)
         {
+            Debug.Log("OnSubmitInput()");
             if (string.IsNullOrEmpty(input))
                 return;
 
@@ -117,9 +110,12 @@ namespace UnityConsole
                 onSubmitInput(input);
         }
 
-        /// <summary>
-        /// Activates the console input, allowing for user submitted input.
-        /// </summary>
+        public void OnValidateInput(string input)
+        {
+            inputField.text = input.TrimEnd(Environment.NewLine.ToCharArray());
+        }
+
+        [Summary("Activates the console input, allowing for user submitted input.")]
         public void ActivateInputField()
         {
             inputField.Select();
@@ -127,27 +123,21 @@ namespace UnityConsole
             inputField.MoveTextEnd(false);
         }
 
-        /// <summary>
-        /// Clears the console input.
-        /// </summary>
+        [Summary("Clears the console input.")]
         public void ClearInput()
         {
             SetInput("");
         }
 
-        /// <summary>
-        /// Writes the given string into the console input, ready to be user submitted.
-        /// </summary>
+        [Summary("Writes the given string into the console input, ready to be user submitted.")]
         public void SetInput(string input) 
         {
             inputField.MoveTextStart(false);
-            inputField.value = input;
+            inputField.text = input;
             inputField.MoveTextEnd(false);
         }
 
-        /// <summary>
-        /// Selects and highlights the text in the console input
-        /// </summary>
+        [Summary("Selects and highlights the text in the console input")]
         public void HighlightInput()
         {
             // untested
@@ -155,18 +145,14 @@ namespace UnityConsole
             inputField.MoveTextEnd(true);
         }
 
-        /// <summary>
-        /// Clears the console output.
-        /// </summary>
+        [Summary("Clears the console output.")]
         public void ClearOutput()
         {
             outputText.text = "";
             outputText.SetLayoutDirty();
         }
 
-        /// <summary>
-        /// Displays the given message as a new entry in the console output.
-        /// </summary>
+        [Summary("Displays the given message as a new entry in the console output.")]
         public void AddNewOutputEntry(string message)
         {
             outputText.text += Environment.NewLine + message;

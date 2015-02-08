@@ -2,8 +2,8 @@
 
 namespace UnityConsole.Examples
 {
-    /// Control the camera with the mouse like a first-person game. MouseLook rotates the transform based on the mouse delta.
-    /// Minimum and Maximum values can be used to constrain the possible rotation.
+    // Control the camera with the mouse like a first-person game. MouseLook rotates the transform based on the mouse delta.
+    // Minimum and Maximum values can be used to constrain the possible rotation.
     [AddComponentMenu("UnityConsole/Examples/Mouse Look")]
     public class MouseLook : MonoBehaviour
     {

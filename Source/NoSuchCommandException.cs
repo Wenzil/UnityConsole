@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// An exception thrown when attempting to retrieve a command that does not exist.
-    /// </summary>
+    [Summary("An exception thrown when attempting to retrieve a command that does not exist.")]
     [Serializable]
     public class NoSuchCommandException : Exception
     {
-        /// <summary>
-        /// The command that does not exist.
-        /// </summary>
+        [Summary("The command that does not exist.")]
         public string command { get; private set; }
 
         public NoSuchCommandException() : base() { }
@@ -29,9 +26,7 @@ namespace UnityConsole
                 this.command = info.GetString("command");
         }
 
-        /// <summary>
-        /// Perform serialization. Not part of the public API.
-        /// </summary>
+        [Summary("Perform serialization. Not part of the public API.")]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

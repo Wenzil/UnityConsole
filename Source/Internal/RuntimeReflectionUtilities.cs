@@ -5,19 +5,13 @@ using System.Reflection;
 
 namespace UnityConsole.Internal
 {
-    /// <summary>
-    /// Some reflection utilities that can be AOT compiled (and are therefore available at runtime).
-    /// </summary>
+    // Some reflection utilities that can be AOT compiled (and are therefore available at runtime).
     internal class RuntimeReflectionUtilities
     {
-        /// <summary>
-        /// The assemblies to reflect upon.
-        /// </summary>
+        // The assemblies to reflect upon.
         public static readonly ICollection<Assembly> assemblies = new List<Assembly> { Assembly.GetExecutingAssembly() };
 
-        /// <summary>
-        /// Returns all methods that have the given attribute type in the current assemblies.
-        /// </summary>
+        // Returns all methods that have the given attribute type in the current assemblies.
         public static IEnumerable<MethodInfo> GetAllMethodsWithAttribute<A>(BindingFlags bindingAttr)
         {
             return from assembly in assemblies
@@ -28,17 +22,13 @@ namespace UnityConsole.Internal
                    select method;
         }
 
-        /// <summary>
-        /// Counts the number of types in the current assemblies.
-        /// </summary>
+        // Counts the number of types in the current assemblies.
         public static int CountAllTypes()
         {
             return GetAllTypes().Count();
         }
 
-        /// <summary>
-        /// Returns all types in the current assemblies.
-        /// </summary>
+        // Returns all types in the current assemblies.
         public static IEnumerable<Type> GetAllTypes()
         {
             return from assembly in assemblies

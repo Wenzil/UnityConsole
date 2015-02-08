@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityConsole.Internal;
+using CSharpDocumentation;
 
 namespace UnityConsole
 {
-    /// <summary>
-    /// An utility for registering commands with the console. Use ConsoleCommandsDatabase.RegisterCommand() to register commands at runtime.
-    /// </summary>
+    [Summary("An utility for registering commands with the console.")]
     public static class CommandDatabase
     {
         private static Dictionary<string, Command> database = new Dictionary<string, Command>(StringComparer.OrdinalIgnoreCase);
 
-        /// <summary>
-        /// Returns all the command names in alphabetical order.
-        /// </summary>
+        [Summary("Returns all the command names in alphabetical order.")]
         public static IEnumerable<string> commandNames { get { return database.Keys.OrderBy(name => name); } }
 
         // Find all static methods decorated with the [Command] attribute and register them
@@ -47,27 +44,23 @@ namespace UnityConsole
             return RuntimeReflectionUtilities.GetAllMethodsWithAttribute<CommandAttribute>(bindingFlags);
         }
 
-        /// <summary>
-        /// Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.
-        /// </summary>
-        /// <param name="command">The name of the command</param>
-        /// <param name="callback">The command execution callback, i.e the method to call when the command is executed</param>
-        /// <param name="description">A short description describing what the command does</param>
-        /// <param name="syntax">Syntax information for the command arguments</param>
-        /// <param name="overrideExisting">Whether to override the command that is already registered with the same name (if there is one)</param>
+        [Summary("Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.")]
+        [Parameter("command", "The name of the command")]
+        [Parameter("callback", "The command execution callback, i.e the method to call when the command is executed")]
+        [Parameter("description", "A short description describing what the command does")]
+        [Parameter("syntax", "Syntax information for the command arguments")]
+        [Parameter("overrideExisting", "Whether to override the command that is already registered with the same name (if there is one)")]
         public static void RegisterCommand(string command, Command.Callback callback, string description, string syntax)
         {
             RegisterCommand(command, callback, description, syntax, true);
         }
 
-        /// <summary>
-        /// Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.
-        /// </summary>
-        /// <param name="command">The name of the command</param>
-        /// <param name="callback">The command execution callback, i.e the method to call when the command is executed</param>
-        /// <param name="description">A short description describing what the command does</param>
-        /// <param name="syntax">Syntax information for the command arguments</param>
-        /// <param name="overrideExisting">Whether to override the command that is already registered with the same name (if there is one)</param>
+        [Summary("Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.")]
+        [Parameter("command", "The name of the command")]
+        [Parameter("callback", "The command execution callback, i.e the method to call when the command is executed")]
+        [Parameter("description", "A short description describing what the command does")]
+        [Parameter("syntax", "Syntax information for the command arguments")]
+        [Parameter("overrideExisting", "Whether to override the command that is already registered with the same name (if there is one)")]
         public static void RegisterCommand(string command, Command.Callback callback, string description, string syntax, bool overrideExisting)
         {
             command = command.ToUpper();
@@ -78,11 +71,9 @@ namespace UnityConsole
                 database[command] = new Command(command, callback, description, syntax);
         }
 
-        /// <summary>
-        /// Retrieve the given command by name.
-        /// </summary>
-        /// <returns>The retrieved command</returns>
-        /// <exception cref="UnityConsole.NoSuchCommandException">Thrown when there is no such command</exception>
+        [Summary("Retrieve the given command by name.")]
+        [Returns("The retrieved command")]
+        [Exception(typeof(UnityConsole.NoSuchCommandException), "Thrown when there is no such command")]
         public static Command GetCommand(string command)
         {
             if (HasCommand(command))
@@ -91,9 +82,7 @@ namespace UnityConsole
                 throw new NoSuchCommandException("Command " + command.ToUpper() + " not found.", command);
         }
 
-        /// <summary>
-        /// Returns whether a command with the given name exists.
-        /// </summary>
+        [Summary("Returns whether a command with the given name exists.")]
         public static bool HasCommand(string command)
         {
             return database.ContainsKey(command);

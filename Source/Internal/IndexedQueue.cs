@@ -2,39 +2,25 @@
 
 namespace UnityConsole.Internal
 {
-    /// <summary>
-    /// A First-In-First-Out, fixed-capacity queue with lookup functionality by means of an indexer.
-    /// </summary>
-    /// <remarks>
-    /// Enqueue, Dequeue and lookup are all O(1) operations thanks to the circular array implementation. This is useful for input history navigation.
-    /// </remarks>
+    // A First-In-First-Out, fixed-capacity queue with lookup functionality by means of an indexer.
+    // Enqueue, Dequeue and lookup are all O(1) operations thanks to the circular array implementation. This is useful for input history navigation.
     internal class IndexedQueue<T>
     {
         private T[] array;
         private int capacity;
         private int front;
 
-        /// <summary>
-        /// The number of elements currently in the queue.
-        /// </summary>
+        // The number of elements currently in the queue.
         public int Count { get; private set; }
 
-        /// <summary>
-        /// Whether the queue is currently empty.
-        /// </summary>
+        // Whether the queue is currently empty.
         public bool IsEmpty { get { return Count == 0; } }
 
-        /// <summary>
-        /// Whether the queue is currently at maximum capacity.
-        /// </summary>
+        // Whether the queue is currently at maximum capacity.
         public bool IsFull { get { return Count == capacity; } }
 
-        /// <summary>
-        /// Retrieves the element at the given index.
-        /// </summary>
-        /// <exception cref="System.IndexOutOfRangeException">
-        /// Thrown when the queue is empty or if the given index is greater or equal than Count
-        /// </exception>
+        // Retrieves the element at the given index.
+        // Throws a System.IndexOutOfRangeException when the queue is empty or if the given index is greater or equal than Count
         public T this[int i]
         {
             get
@@ -51,12 +37,8 @@ namespace UnityConsole.Internal
             }
         }
 
-        /// <summary>
-        /// Constructs a new queue with the given (fixed) capacity.
-        /// </summary>
-        /// <exception cref="System.InvalidOperationException">
-        /// Thrown when a capacity of 0 is given
-        /// </exception>
+        // Constructs a new queue with the given (fixed) capacity.
+        // Throws a System.InvalidOperationException when a capacity of 0 is given
         public IndexedQueue(int capacity)
         {
             this.capacity = capacity;
@@ -65,12 +47,8 @@ namespace UnityConsole.Internal
                 throw new InvalidOperationException("Cannot create an IndexedQueue with a capacity of 0.");
         }
 
-        /// <summary>
-        /// Adds an element to the end of the queue.
-        /// </summary>
-        /// <remarks>
-        /// If Count already equals the capacity, then the first element is replaced with the given one
-        /// </remarks>
+        // Adds an element to the end of the queue.
+        // If Count already equals the capacity, then the first element is replaced with the given one
         public void Enqueue(T element)
         {
             this[Count] = element;
@@ -80,12 +58,8 @@ namespace UnityConsole.Internal
                 Count++;
         }
 
-        /// <summary>
-        /// Removes and returns the element at the beginning of the queue.
-        /// </summary>
-        /// <exception cref="System.InvalidOperationException">
-        /// Thrown when the queue is already empty.
-        /// </exception>
+        // Removes and returns the element at the beginning of the queue.
+        // Throws a System.InvalidOperationException when the queue is already empty.
         public T Dequeue()
         {
             if (IsEmpty)
@@ -98,12 +72,8 @@ namespace UnityConsole.Internal
             return element;
         }
 
-        /// <summary>
-        /// Returns the element at the beginning of the queue without removing it.
-        /// </summary>
-        /// <exception cref="System.InvalidOperationException">
-        /// Thrown when the queue is already empty.
-        /// </exception>
+        // Returns the element at the beginning of the queue without removing it.
+        // Throws a System.InvalidOperationException when the queue is already empty.
         public T Peek()
         {
             if (IsEmpty)
@@ -112,9 +82,7 @@ namespace UnityConsole.Internal
             return this[0];
         }
 
-        /// <summary>
-        /// Removes all elements from the queue.
-        /// </summary>
+        // Removes all elements from the queue.
         public void Clear()
         {
             for (int i = 0; i < capacity; i++)

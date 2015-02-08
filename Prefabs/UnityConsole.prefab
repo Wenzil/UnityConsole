@@ -368,7 +368,7 @@ MonoBehaviour:
   inputField: {fileID: 11400026}
   outputArea: {fileID: 11400010}
   outputText: {fileID: 11400014}
-  activateInputFieldOnToggle: 1
+  activateInputFieldOnOpen: 1
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,15 +432,15 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 11400004}
   m_TextComponent: {fileID: 11400024}
-  inputType: 0
-  keyboardType: 0
-  onReturnKey: 0
-  hideMobileInput: 0
-  validation: 0
-  characterLimit: 0
-  multiLine: 0
-  activeTextColor: {r: 1, g: 1, b: 1, a: 1}
-  onSubmit:
+  m_Placeholder: {fileID: 0}
+  m_ContentType: 0
+  m_InputType: 0
+  m_KeyboardType: 0
+  m_LineType: 0
+  m_HideMobileInput: 0
+  m_CharacterValidation: 0
+  m_CharacterLimit: 0
+  m_EndEdit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400022}
@@ -454,17 +454,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  onValueChange:
+  m_OnValueChange:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+OnChangeEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  selectionColor: {r: 0, g: .540390015, b: 1, a: .588235319}
-  m_Value: 
-  m_CaretBlinkSpeed: .5
+  m_SelectionColor: {r: 0, g: .540390015, b: 1, a: .588235319}
+  m_Text: 
+  m_CaretBlinkRate: 1.70000005
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
