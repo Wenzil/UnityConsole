@@ -24,44 +24,44 @@ Anywhere in your code, simply use ```Console.Log()``` to output to the console.
 To execute a command, simply type it into the console input, followed by its command arguments if any. 
 
 UnityConsole comes with 3 built-in commands.
-- *commands* - displays the list of all available commands
-- *help*- displays general help information, or details about the given command
-- *quit* - quits the application
+- *commands* - Displays the list of all available commands
+- *help* - Displays general help information, or details about the given command
+- *quit* - Quits the application
 
 For example, typing ```help quit``` will execute the *help* command which will display details about the *quit* command
 
 ## Registering Static Commands
 UnityConsole allows you to define your own commands. Commands defined in static methods can be registered with the console by applying the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute:
 
-1. Create a static method compatible with the predefined [Command.Callback](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-command-callback) delegate signature
+1. Define a static method compatible with the predefined [Command.Callback](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-command-callback) delegate signature
 2. Apply the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute to the method, specifying the command name, description and syntax
 
+For example, the following method defines a static command whose job is to output "HELLO WORLD".
 ```csharp
 using UnityConsole;
 
 public class StaticCommandExample
 {
-    // Define a static command whose job is to output HELLO WORLD
     [Command("hello", description = "Outputs \"HELLO WORLD\"", syntax = "hello")]
     private static string Hello(params string[] args)
     {
-        // the return value is the command output
         return "HELLO WORLD";
     }
 }
 ```
 
-The string array parameter contains any command-line arguments passed in. Since the command is static and is decorated with the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute, it will be registered with the console automatically at runtime.
+The string array parameter contains any command-line arguments passed in. The return value is the command output. Since the command is static and is decorated with the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute, it will be registered with the console automatically at runtime. It can be invoked by typing ```hello``` into the console input. 
 
 ## Registering Non-Static Commands
 Non-static commands need to be registered manually at runtime. It can be done at any point, but a good place to do it is within the Start() method of a script.
 
+For example, the following script defines a non-static command whose job is to toggle the UI visibility of the game.
 ```csharp
 using UnityConsole;
 
 public class NonStaticCommandExample : MonoBehaviour
 {
-    // Store a reference on the UI Canvas object in the scene.
+    // Store a reference to the UI Canvas object in the scene (assigned from the inspector)
     public Canvas UI;
 
     // Manually register our non-static command whenever this object is initialized
@@ -70,7 +70,7 @@ public class NonStaticCommandExample : MonoBehaviour
         CommandDatabase.RegisterCommand("toggle_ui", ToggleUI, "Toggles the UI visibility", "toggle_ui");
     }
 
-    // Define a command whose job is to toggle the UI visibility.
+    // Define the command
     public string ToggleUI(params string[] args)
     {
         UI.enabled = !UI.enabled;
@@ -79,7 +79,7 @@ public class NonStaticCommandExample : MonoBehaviour
 }
 ```
 
-The string array parameter contains any command-line arguments passed in. Unlike static commands, non-static commands make it easier to reference game objects in the scene. 
+Unlike static commands, non-static commands require manual registration at runtime but make it easier to reference game objects in the scene. After the command has been registered, it can be invoked by typing ```toggle_ui``` into the console input.
 
 ## World space UI
 You can use the console in world space too! Simply set your Canvas Render Mode to World Space. You may also need to scale down the Canvas. In the future, I want to implement great VR support. There's an alpha VR demo [available here](http://wenzil.github.io/UnityConsole/).
