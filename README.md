@@ -39,7 +39,7 @@ UnityConsole allows you to write your own commands using C#. The process is done
 ### Non-Static Commands
 Commands defined in non-static methods must be registered manually by invoking the ```CommandDatabase.RegisterCommand()``` method at runtime. It can be done at any point, but a good place for it is within the Start() method of a script.
 
-For example, the following script defines a non-static command whose job is to toggle the UI visibility of the game.
+For example, the following script defines a non-static command `toggle_ui` whose job is to toggle the UI visibility of the game.
 ```csharp
 using UnityConsole;
 
@@ -66,7 +66,7 @@ public class NonStaticCommandExample : MonoBehaviour
 ### Static Commands
 Commands defined in static methods can be registered by simply applying the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute to the method. 
 
-For example, the following class defines a static command whose job is to output "Hello World!". Since the command is static and is decorated with the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute, it will be registered with the console automatically at runtime.
+For example, the following class defines a static command `hello` whose job is to output "Hello World!". Since the command is static and is decorated with the [CommandAttribute](http://wenzil.github.io/UnityConsole/index.html#unityconsole-namespace-commandattribute) attribute, it will be registered with the console automatically at runtime.
 ```csharp
 using UnityConsole;
 
@@ -76,6 +76,33 @@ public class StaticCommandExample
     private static string Hello(params string[] args)
     {
         return "Hello World!";
+    }
+}
+```
+
+### Handling Command Arguments
+UnityConsole requires only that arguments passed to a command are whitespace-separated if any. The handling of these arguments is left to you but you should guard against accessing arguments that weren't passed in. For example, the following class defines a static command `connect` that expects a username, password, server and an optional port. Special care is taken so that omitting the username, password or server arguments when invoking the command will gracefully abort its execution.
+```csharp
+using UnityConsole;
+
+public class HandlingCommandArgumentsExample
+{
+    [Command("connect", description = "Connect the specified user to the specified server", syntax = "connect username password server [port]")]
+    private static string Connect(params string[] args)
+    {
+        var username = args.Length > 0 ? args[0] : null;
+        var password = args.Length > 1 ? args[1] : null;
+        var server = args.Length > 2 ? args[2] : null;
+        var port = args.Length > 3 ? args[3] : "80"; // default port is 80
+        
+        if (username == null || password == null || server == null)
+        {
+            return "Could not connect to server because the authentication information is invalid."; //gracefully abort the command execution
+        }
+        else
+        {
+            return MyServerAPI.Connect(username, password, server, port);
+        }
     }
 }
 ```
