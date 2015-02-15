@@ -1,4 +1,5 @@
 ﻿using CSharpDocumentation;
+using System;
 
 namespace UnityConsole 
 {
@@ -10,7 +11,7 @@ namespace UnityConsole
         [Returns("The command response")]
         public delegate string Callback(params string[] args);
 
-        [Summary("The label that refers to the command. Can be used from the console input to execute the command. ")]
+        [Summary("The command identifier used to access and execute the command.")]
         public string name { get; private set; }
 
         [Summary("The command execution callback, i.e. the method to call when the command is executed.")]
@@ -23,6 +24,7 @@ namespace UnityConsole
         public string syntax { get; private set; }
 
         [Summary("Constructs a Command with the given name, execution callback, description and syntax information.")]
+        [CodeExample("var command = new Command(\"join\", args => string.Join(\", \", args), \"Join the string arguments together.\", \"join args\");")]
         public Command(string name, Command.Callback callback, string description, string syntax) : this()
         {
             this.name = name;

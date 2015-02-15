@@ -4,7 +4,7 @@ using CSharpDocumentation;
 namespace UnityConsole
 {
     [Summary("Indicates that a method will act as a console command. The method must be static and compatible with the *Command.Callback* delegate signature. When you apply this attribute to such a method, it will be registered with the console automatically at runtime.")]
-    [SeeAlso("[Command.Callback](#unityconsole-command-callback)")]
+    [SeeAlso("[Command.Callback](#unityconsole-namespace-commandcallback)")]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class CommandAttribute : Attribute
     {

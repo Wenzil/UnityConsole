@@ -27,7 +27,7 @@ namespace UnityConsole
                 this.command = (MethodInfo) info.GetValue("command", typeof(MethodInfo));
         }
 
-        [Summary("Perform serialization. Not part of the public API.")]
+        // Perform serialization
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

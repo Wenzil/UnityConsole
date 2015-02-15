@@ -49,7 +49,6 @@ namespace UnityConsole
         [Parameter("callback", "The command execution callback, i.e the method to call when the command is executed")]
         [Parameter("description", "A short description describing what the command does")]
         [Parameter("syntax", "Syntax information for the command arguments")]
-        [Parameter("overrideExisting", "Whether to override the command that is already registered with the same name (if there is one)")]
         public static void RegisterCommand(string command, Command.Callback callback, string description, string syntax)
         {
             RegisterCommand(command, callback, description, syntax, true);
