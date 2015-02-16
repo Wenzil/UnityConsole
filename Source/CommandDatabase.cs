@@ -18,7 +18,6 @@ namespace UnityConsole
         // Find all static methods decorated with the [Command] attribute and register them
         static CommandDatabase()
         {
-
             foreach (MethodInfo method in GetAllStaticCommands())
             {
                 var excludeCommandAttribute = method.GetCustomAttributes(typeof(ExcludeCommandAttribute), false);

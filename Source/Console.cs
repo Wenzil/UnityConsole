@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using CSharpDocumentation;
 
+[assembly: NamespaceSummary("UnityConsole", "This namespace contains the main UnityConsole components.")]
+[assembly: NamespaceSummary("UnityConsole.Commands", "This namespace contains the built-in UnityConsole commands.")]
 namespace UnityConsole
 {
     [Summary("Static representation of the console. Use Console.Log() anywhere in your code to log messages.")]

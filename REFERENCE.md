@@ -1,6 +1,9 @@
-# UnityConsole namespace
+# UnityConsole
+```namespace UnityConsole```
+
+This namespace contains the main UnityConsole components.
 ```csharp
-    using UnityConsole;
+using UnityConsole;
 ```
 
 ## Command
@@ -8,61 +11,72 @@
 
 Command information and execution callback.
 
-### Command.name
+### name
 ```public string name { get; private set; }```
 
-The label that refers to the command. Can be used from the console input to execute the command. 
+The command identifier used to access and execute the command.
 
-### Command.callback
+### callback
 ```public Command.Callback callback { get; private set; }```
 
 The command execution callback, i.e. the method to call when the command is executed.
 
-### Command.description
+### description
 ```public string description { get; private set; }```
 
 A short description describing what the command does.
 
-### Command.syntax
+### syntax
 ```public string syntax { get; private set; }```
 
 Syntax information for the command arguments.
 
-### Command.Command()
+### Command()
 ```public Command(string name, Command.Callback callback, string description, string syntax)```
 
 Constructs a Command with the given name, execution callback, description and syntax information.
+```csharp
+var command = new Command("join", args => string.Join(", ", args), "Join the string arguments together.", "join args");
+```
 
-### Command.ToString()
+### ToString()
 ```public override string ToString()```
 
 Returns a string representation of the command in the format: name - description
 
+## Command.Callback
+```public delegate string Command.Callback(params string[] args)```
+
+The command execution callback signature.
+#### Parameters
+- *args* - The command arguments
+
+#### Return Value
+The command response
+
 ## CommandAttribute
 ```public class CommandAttribute : Attribute, _Attribute```
 
-Indicates that a method will act as a console command.
-#### Remarks
-Apply the [Command] attribute to a method to indicate that the method will act as a console command. The method must be static and compatible with the *Command.Callback* delegate signature. When you apply the [Command] attribute to such a method, it will be registered with the console automatically at runtime.
+Indicates that a method will act as a console command. The method must be static and compatible with the *Command.Callback* delegate signature. When you apply this attribute to such a method, it will be registered with the console automatically at runtime.
 #### See Also
-[Command.Callback](#unityconsole-command-callback)
+- [Command.Callback](#unityconsole-namespace-commandcallback)
 
-### CommandAttribute.name
+### name
 ```public string name { get; private set; }```
 
 The label that refers to the command. Can be used from the console input to execute the command. 
 
-### CommandAttribute.description
+### description
 ```public string description { get; set; }```
 
 A short description describing what the command does.
 
-### CommandAttribute.syntax
+### syntax
 ```public string syntax { get; set; }```
 
 Syntax information for the command arguments.
 
-### CommandAttribute.overrideRegistered
+### overrideRegistered
 ```public bool overrideRegistered { get; set; }```
 
 Whether to override the command that is already registered with the same name (if there is one)
@@ -72,42 +86,43 @@ Whether to override the command that is already registered with the same name (i
 
 An utility for registering commands with the console.
 
-### CommandDatabase.commandNames
+### commandNames
 ```public static IEnumerable<string> commandNames { get; }```
 
 Returns all the command names in alphabetical order.
 
-### CommandDatabase.RegisterCommand()
+### RegisterCommand()
 ```public static void RegisterCommand(string command, Command.Callback callback, string description, string syntax)```
 
 Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.
 #### Parameters
-command - The name of the command
-callback - The command execution callback, i.e the method to call when the command is executed
-description - A short description describing what the command does
-syntax - Syntax information for the command arguments
+- *command* - The name of the command
+- *callback* - The command execution callback, i.e the method to call when the command is executed
+- *description* - A short description describing what the command does
+- *syntax* - Syntax information for the command arguments
 
-### CommandDatabase.RegisterCommand()
+### RegisterCommand()
 ```public static void RegisterCommand(string command, Command.Callback callback, string description, string syntax, bool overrideExisting)```
 
 Registers a command with the console. If a command with the same name already exists, it is replaced with the new one.
 #### Parameters
-command - The name of the command
-callback - The command execution callback, i.e the method to call when the command is executed
-description - A short description describing what the command does
-syntax - Syntax information for the command arguments
-overrideExisting - Whether to override the command that is already registered with the same name (if there is one)
+- *command* - The name of the command
+- *callback* - The command execution callback, i.e the method to call when the command is executed
+- *description* - A short description describing what the command does
+- *syntax* - Syntax information for the command arguments
+- *overrideExisting* - Whether to override the command that is already registered with the same name (if there is one)
 
-### CommandDatabase.GetCommand()
+### GetCommand()
 ```public static Command GetCommand(string command)```
 
 Retrieve the given command by name.
+
 #### Return Value
 The retrieved command
 #### Exceptions
-NoSuchCommandException - Thrown when there is no such command
+- *NoSuchCommandException* - Thrown when there is no such command
 
-### CommandDatabase.HasCommand()
+### HasCommand()
 ```public static bool HasCommand(string command)```
 
 Returns whether a command with the given name exists.
@@ -117,41 +132,43 @@ Returns whether a command with the given name exists.
 
 Static representation of the console. Use Console.Log() anywhere in your code to log messages.
 
-### Console.onLog
+### onLog
 ```public static event Action<string> onLog```
 
 Occurs whenever a new message is logged.
 
-### Console.onClear
+### onClear
 ```public static event Action onClear```
 
 Occurs whenever the console is cleared.
 
-### Console.ExecuteCommand()
+### ExecuteCommand()
 ```public static string ExecuteCommand(string input)```
 
 Parses the given command input and executes it with the parsed arguments.
 #### Parameters
-input - The raw command input string for the command (may contain arguments to be parsed)
+- *input* - The raw command input string for the command (may contain arguments to be parsed)
+
 #### Return Value
 The command response
 
-### Console.ExecuteCommand()
+### ExecuteCommand()
 ```public static string ExecuteCommand(string command, params string[] args)```
 
 Executes the given command with the given command arguments.
 #### Parameters
-command - The name of the command to execute
-args - The command arguments
+- *command* - The name of the command to execute
+- *args* - The command arguments
+
 #### Return Value
 The command response
 
-### Console.Log()
+### Log()
 ```public static void Log(string message)```
 
 Logs the given message.
 
-### Console.Clear()
+### Clear()
 ```public static void Clear()```
 
 Clears the console.
@@ -161,17 +178,17 @@ Clears the console.
 
 The behaviour of the console.
 
-### ConsoleController.toggleKey
+### toggleKey
 ```public KeyCode toggleKey```
 
 The keyboard shortcut for opening and closing the console.
 
-### ConsoleController.closeOnEscape
+### closeOnEscape
 ```public bool closeOnEscape```
 
 Determines whether or not to close the console when pressing the Escape key on the keyboard.
 
-### ConsoleController.inputHistoryCapacity
+### inputHistoryCapacity
 ```public int inputHistoryCapacity```
 
 The maximum capacity for the console input history. Older input entries will be thrown away.
@@ -186,31 +203,33 @@ When initiating navigation down (after a new input entry was submitted or the co
 When navigating up, we navigate ABOVE the last navigated-to input entry. 
 When navigating down, we navigate BELOW the last navigated-to input entry.
 
-### ConsoleInputHistory.ConsoleInputHistory()
+### ConsoleInputHistory()
 ```public ConsoleInputHistory(int maxCapacity)```
 
 Constructs the console input history with the given maximum capacity.
 
-### ConsoleInputHistory.NavigateUp()
+### NavigateUp()
 ```public string NavigateUp()```
 
 Navigate (or initiate navigation) up the input history
+
 #### Return Value
 The navigated-to input entry
 
-### ConsoleInputHistory.NavigateDown()
+### NavigateDown()
 ```public string NavigateDown()```
 
 Navigate (or initiate navigation) down the input history
+
 #### Return Value
 The navigated-to input entry
 
-### ConsoleInputHistory.AddNewInputEntry()
+### AddNewInputEntry()
 ```public void AddNewInputEntry(string input)```
 
 Adds a new input entry to the input history.
 
-### ConsoleInputHistory.Clear()
+### Clear()
 ```public void Clear()```
 
 Clears the input history and resets its navigation.
@@ -220,72 +239,72 @@ Clears the input history and resets its navigation.
 
 The visual component of the console.
 
-### ConsoleUI.onToggle
+### onToggle
 ```public event Action<bool> onToggle```
 
 Occurs when the console is opened or closed.
 
-### ConsoleUI.onSubmitInput
+### onSubmitInput
 ```public event Action<string> onSubmitInput```
 
 Occurs when an input entry is submitted by the user.
 
-### ConsoleUI.isOpen
+### isOpen
 ```public bool isOpen { get; }```
 
 Indicates whether the console is currently open or close.
 
-### ConsoleUI.activateInputFieldOnOpen
+### activateInputFieldOnOpen
 ```public bool activateInputFieldOnOpen```
 
 Indicates whether or not to activate the console input when opening the console.
 
-### ConsoleUI.Toggle()
+### Toggle()
 ```public void Toggle()```
 
 Opens or closes the console.
 
-### ConsoleUI.Open()
+### Open()
 ```public void Open()```
 
 Opens the console.
 
-### ConsoleUI.Close()
+### Close()
 ```public void Close()```
 
 Closes the console.
 
-### ConsoleUI.OnSubmitInput()
+### OnSubmitInput()
 ```public void OnSubmitInput(string input)```
 
 Clears/reactivates the console input, scrolls to the bottom of the console output and triggers the onSubmitInput event.
 
-### ConsoleUI.ActivateInputField()
+### ActivateInputField()
 ```public void ActivateInputField()```
 
 Activates the console input, allowing for user submitted input.
 
-### ConsoleUI.ClearInput()
+### ClearInput()
 ```public void ClearInput()```
 
 Clears the console input.
 
-### ConsoleUI.SetInput()
+### SetInput()
 ```public void SetInput(string input)```
 
 Writes the given string into the console input, ready to be user submitted.
 
-### ConsoleUI.HighlightInput()
+### HighlightInput()
 ```public void HighlightInput()```
 
 Selects and highlights the text in the console input
 
-### ConsoleUI.ClearOutput()
+### ClearOutput()
 ```public void ClearOutput()```
 
 Clears the console output.
 
-### ConsoleUI.AddNewOutputEntry()
+### AddNewOutputEntry()
 ```public void AddNewOutputEntry(string message)```
 
 Displays the given message as a new entry in the console output.
@@ -300,34 +319,27 @@ Indicates that a command will not be registered with the console automatically a
 
 An exception thrown when a static command has an invalid method signature
 
-### InvalidCommandSignatureException.command
+### command
 ```public MethodInfo command { get; private set; }```
 
 The command with the invalid method signature.
-
-### InvalidCommandSignatureException.GetObjectData()
-```public override void GetObjectData(SerializationInfo info, StreamingContext context)```
-
-Perform serialization. Not part of the public API.
 
 ## NoSuchCommandException
 ```public class NoSuchCommandException : Exception, ISerializable, _Exception```
 
 An exception thrown when attempting to retrieve a command that does not exist.
 
-### NoSuchCommandException.command
+### command
 ```public string command { get; private set; }```
 
 The command that does not exist.
 
-### NoSuchCommandException.GetObjectData()
-```public override void GetObjectData(SerializationInfo info, StreamingContext context)```
+# UnityConsole.Commands
+```namespace UnityConsole.Commands```
 
-Perform serialization. Not part of the public API.
-
-# UnityConsole.Commands namespace
+This namespace contains the built-in UnityConsole commands.
 ```csharp
-    using UnityConsole.Commands;
+using UnityConsole.Commands;
 ```
 
 ## CommandsCommand
@@ -335,7 +347,7 @@ Perform serialization. Not part of the public API.
 
 A definition for the COMMANDS command.
 
-### CommandsCommand.Commands()
+### Commands()
 ```public static string Commands(params string[] args)```
 
 Displays the list of available commands.
@@ -345,7 +357,7 @@ Displays the list of available commands.
 
 A definition for the HELP command.
 
-### HelpCommand.Help()
+### Help()
 ```public static string Help(params string[] args)```
 
 Displays general syntax information or specific command usage.
@@ -355,23 +367,12 @@ Displays general syntax information or specific command usage.
 
 A definition for the QUIT command.
 
-### QuitCommand.Quit()
+### Quit()
 ```public static string Quit(params string[] args)```
 
 Quits the application.
 
-# UnityConsole.Internal namespace
-```csharp
-    using UnityConsole.Internal;
-```
-
-## ShowInInspectorAttribute
-```public class ShowInInspectorAttribute : PropertyAttribute, _Attribute```
-
-Customize the property's appearance in the inspector.
-
 # Warnings
-The parameter 'overrideExisting' documented as part of method CommandDatabase.RegisterCommand() was exluded because CommandDatabase.RegisterCommand() accepts no such parameter.
 
 
-CSharpToMarkdown executed in 105 milliseconds
+CSharpToMarkdown executed in 62 milliseconds
