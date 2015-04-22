@@ -7,32 +7,32 @@ using Wenzil.Console;
 /// </summary>
 public class CustomCommands : MonoBehaviour
 {
-	void Start()
-	{
-		ConsoleCommandsDatabase.RegisterCommand("QUIT", "Quits the application.", "QUIT", CustomCommands.Quit);
+    void Start()
+    {
+        ConsoleCommandsDatabase.RegisterCommand("QUIT", "Quits the application.", "QUIT", CustomCommands.Quit);
         ConsoleCommandsDatabase.RegisterCommand("SPAWN", "Spawn a new game object from the given name and primitve type in front of the main camera. See PrimitiveType.", "SPAWN [name] [primitiveType]", CustomCommands.Spawn);
         ConsoleCommandsDatabase.RegisterCommand("HELP", "Displays help information for the given command.", "HELP [command]", CustomCommands.Help);
-	}
+    }
 
-	/// <summary>
-	/// Quit the application.
-	/// </summary>
-	private static string Quit(params string[] args)
-	{
-		Application.Quit();
+    /// <summary>
+    /// Quit the application.
+    /// </summary>
+    private static string Quit(params string[] args)
+    {
+        Application.Quit();
 #if UNITY_EDITOR
-		if (Application.isEditor)
-			UnityEditor.EditorApplication.isPlaying = false;
+        if (Application.isEditor)
+            UnityEditor.EditorApplication.isPlaying = false;
 #endif
 
-		return "Quitting...";
-	}
+        return "Quitting...";
+    }
 
-	/// <summary>
+    /// <summary>
     /// Spawn a new game object from the given name and primitve type in front of the main camera. See PrimitiveType.
-	/// </summary>
-	private static string Spawn(params string[] args)
-	{
+    /// </summary>
+    private static string Spawn(params string[] args)
+    {
         string name;
         PrimitiveType primitiveType;
         GameObject spawned;
@@ -40,7 +40,7 @@ public class CustomCommands : MonoBehaviour
         if(args.Length < 2)
         {
             return Help("SPAWN");
-		}
+        }
         else
         {
             name = args[0];
@@ -58,23 +58,23 @@ public class CustomCommands : MonoBehaviour
             spawned.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
             return "Spawned a new " + primitiveType + " named: " + name;
         }
-	}
+    }
 
     /// <summary>
     /// (Advanced) Displays help information for the given command.
     /// </summary>
     private static string Help(params string[] args)
-	{
+    {
         // if we got it wrong, get help about the HELP command
         if (args.Length == 0)
             return Help("HELP");
 
         // if we got it right, get help about the given command
         string commandToGetHelpAbout = args[0].ToUpper();
-		ConsoleCommand found;
-		if(ConsoleCommandsDatabase.TryGetCommand(commandToGetHelpAbout, out found))
+        ConsoleCommand found;
+        if(ConsoleCommandsDatabase.TryGetCommand(commandToGetHelpAbout, out found))
             return string.Format("Help information about {0}\n\r\tDescription: {1}\n\r\tUsage: {2}", commandToGetHelpAbout, found.description, found.usage);
-		else
-			return string.Format("Cannot find help information about {0}. Are you sure it is a valid command?", commandToGetHelpAbout);
-	}
+        else
+            return string.Format("Cannot find help information about {0}. Are you sure it is a valid command?", commandToGetHelpAbout);
+    }
 }

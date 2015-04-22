@@ -4,17 +4,17 @@ using System.Linq;
 
 namespace Wenzil.Console
 {
-	/// <summary>
-	/// Use RegisterCommand() to register your own commands.
-	/// </summary>
-	public static class ConsoleCommandsDatabase 
-	{
-		private static Dictionary<string, ConsoleCommand> database = new Dictionary<string, ConsoleCommand>(StringComparer.OrdinalIgnoreCase);
-		
-		public static void RegisterCommand(string command, ConsoleCommandCallback callback) 
+    /// <summary>
+    /// Use RegisterCommand() to register your own commands.
+    /// </summary>
+    public static class ConsoleCommandsDatabase 
+    {
+        private static Dictionary<string, ConsoleCommand> database = new Dictionary<string, ConsoleCommand>(StringComparer.OrdinalIgnoreCase);
+        
+        public static void RegisterCommand(string command, ConsoleCommandCallback callback) 
         {
             RegisterCommand(command, "", "", callback);
-		}
+        }
 
         public static void RegisterCommand(string command, string description, string usage, ConsoleCommandCallback callback)
         {
@@ -30,19 +30,19 @@ namespace Wenzil.Console
                 return "Command " + command.ToUpper() + " not found.";
         }
 
-		public static bool TryGetCommand(string command, out ConsoleCommand result)
+        public static bool TryGetCommand(string command, out ConsoleCommand result)
         {
-			if(HasCommand(command))
+            if(HasCommand(command))
             {
-				result = database[command];
-				return true;
-			}
-			else
+                result = database[command];
+                return true;
+            }
+            else
             {
-				result = default(ConsoleCommand);
-				return false;
-			}
-		}
+                result = default(ConsoleCommand);
+                return false;
+            }
+        }
 
         public static ConsoleCommand GetCommand(string command)
         {
@@ -53,5 +53,5 @@ namespace Wenzil.Console
         {
             return database.ContainsKey(command);
         }
-	}
+    }
 }

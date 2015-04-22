@@ -6,21 +6,21 @@ using System;
 namespace Wenzil.Console
 {
 
-	/// <summary>
-	/// The interactive front-end of the Console.
-	/// </summary>
-	[DisallowMultipleComponent]
-	[RequireComponent(typeof(ConsoleController))]
-	public class ConsoleUI : MonoBehaviour, IScrollHandler
-	{
-		public event Action<bool> onToggleConsole;
-		public event Action<string> onSubmitCommand;
-		public event Action onClearConsole;
+    /// <summary>
+    /// The interactive front-end of the Console.
+    /// </summary>
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(ConsoleController))]
+    public class ConsoleUI : MonoBehaviour, IScrollHandler
+    {
+        public event Action<bool> onToggleConsole;
+        public event Action<string> onSubmitCommand;
+        public event Action onClearConsole;
 
-		public Scrollbar scrollbar;
-		public Text outputText;
+        public Scrollbar scrollbar;
+        public Text outputText;
         public ScrollRect outputArea;
-		public InputField inputField;
+        public InputField inputField;
 
         /// <summary>
         /// Indicates whether the console is currently open or close.
@@ -116,38 +116,38 @@ namespace Wenzil.Console
         /// <summary>
         /// Displays the given message as a new entry in the console output.
         /// </summary>
-		public void AddNewOutputLine(string line)
-		{
-			outputText.text += Environment.NewLine + line;
-		}
+        public void AddNewOutputLine(string line)
+        {
+            outputText.text += Environment.NewLine + line;
+        }
 
         /// <summary>
         /// Clears the console output.
         /// </summary>
-		public void ClearOutput()
-		{
-			outputText.text = "";
+        public void ClearOutput()
+        {
+            outputText.text = "";
             outputText.SetLayoutDirty();
-			if(onClearConsole != null)
-				onClearConsole();
-		}
+            if(onClearConsole != null)
+                onClearConsole();
+        }
 
         /// <summary>
         /// Clears the console input.
         /// </summary>
-		public void ClearInput()
-		{
-			SetInputText("");
-		}
+        public void ClearInput()
+        {
+            SetInputText("");
+        }
 
         /// <summary>
         /// Writes the given string into the console input, ready to be user submitted.
         /// </summary>
-		public void SetInputText(string input) 
+        public void SetInputText(string input) 
         {
             inputField.MoveTextStart(false);
-			inputField.text = input;
+            inputField.text = input;
             inputField.MoveTextEnd(false);
-		}
-	}
+        }
+    }
 }

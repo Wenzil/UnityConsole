@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace Wenzil.Console
 {
-	/// <summary>
-	/// The behavior of the Console.
-	/// </summary>
-	[DisallowMultipleComponent]
-	[RequireComponent(typeof(ConsoleController))]
-	public class ConsoleController : MonoBehaviour
-	{
+    /// <summary>
+    /// The behavior of the Console.
+    /// </summary>
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(ConsoleController))]
+    public class ConsoleController : MonoBehaviour
+    {
         private const int inputHistoryCapacity = 20;
  
-		public ConsoleUI ui;
-		public KeyCode toggleKey = KeyCode.BackQuote;
-		public bool closeOnEscape = false;
+        public ConsoleUI ui;
+        public KeyCode toggleKey = KeyCode.BackQuote;
+        public bool closeOnEscape = false;
 
         private ConsoleInputHistory inputHistory = new ConsoleInputHistory(inputHistoryCapacity); 
 
@@ -26,22 +26,22 @@ namespace Wenzil.Console
                Solution: move it to class level initialization, and make inputHistoryCapacity a const */
             // inputHistory = new ConsoleInputHistory(inputHistoryCapacity); 
         }
-		void OnEnable()
-		{
-			Console.OnConsoleLog += ui.AddNewOutputLine;
-			ui.onSubmitCommand += ExecuteCommand;
+        void OnEnable()
+        {
+            Console.OnConsoleLog += ui.AddNewOutputLine;
+            ui.onSubmitCommand += ExecuteCommand;
             ui.onClearConsole += inputHistory.Clear;
-		}
+        }
 
-		void OnDisable()
-		{
-			Console.OnConsoleLog -= ui.AddNewOutputLine;
-			ui.onSubmitCommand -= ExecuteCommand;
+        void OnDisable()
+        {
+            Console.OnConsoleLog -= ui.AddNewOutputLine;
+            ui.onSubmitCommand -= ExecuteCommand;
             ui.onClearConsole -= inputHistory.Clear;
-		}
+        }
 
-		void Update()
-		{
+        void Update()
+        {
             if (Input.GetKeyDown(toggleKey))
                 ui.ToggleConsole();
             else if (Input.GetKeyDown(KeyCode.Escape) && closeOnEscape)
@@ -50,7 +50,7 @@ namespace Wenzil.Console
                 NavigateInputHistory(true);
             else if (Input.GetKeyDown(KeyCode.DownArrow))
                 NavigateInputHistory(false);
-		}
+        }
 
         private void NavigateInputHistory(bool up)
         {
@@ -58,15 +58,15 @@ namespace Wenzil.Console
             ui.SetInputText(navigatedToInput);
         }
 
-		private void ExecuteCommand(string input)
-		{
-			string[] parts = input.Split(' ');
-			string command = parts[0];
-			string[] args = parts.Skip(1).ToArray();
-		
-			Console.Log("> " + input);
-			Console.Log(ConsoleCommandsDatabase.ExecuteCommand(command, args));
+        private void ExecuteCommand(string input)
+        {
+            string[] parts = input.Split(' ');
+            string command = parts[0];
+            string[] args = parts.Skip(1).ToArray();
+        
+            Console.Log("> " + input);
+            Console.Log(ConsoleCommandsDatabase.ExecuteCommand(command, args));
             inputHistory.AddNewInputEntry(input);
-		}
+        }
     }
 }

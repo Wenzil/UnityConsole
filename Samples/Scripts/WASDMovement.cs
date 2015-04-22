@@ -7,8 +7,8 @@ using System.Collections;
 public class WASDMovement : MonoBehaviour
 {
     public float speed = 1;
-	
-	void Update () 
+    
+    void Update () 
     {
         Vector3 direction = Vector3.zero;
 
@@ -26,5 +26,5 @@ public class WASDMovement : MonoBehaviour
         direction.Normalize();
 
         transform.position += direction * speed;
-	}
+    }
 }
