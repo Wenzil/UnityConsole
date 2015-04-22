@@ -11,7 +11,7 @@ namespace Wenzil.Console
     {
         // Input history from most recent to oldest
         private List<string> inputHistory;
-        private int maxCapacity;
+        public int maxCapacity;
 
         // The go-to input entry index. The one to navigate to when first navigating up. It's usually the one most recently navigated-to.
         private int currentInput;

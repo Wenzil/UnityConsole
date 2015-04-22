@@ -12,18 +12,20 @@ namespace Wenzil.Console
 	[RequireComponent(typeof(ConsoleController))]
 	public class ConsoleController : MonoBehaviour
 	{
+        private const int inputHistoryCapacity = 20;
+ 
 		public ConsoleUI ui;
 		public KeyCode toggleKey = KeyCode.BackQuote;
 		public bool closeOnEscape = false;
-        public int inputHistoryCapacity = 20;
 
-        private ConsoleInputHistory inputHistory;
+        private ConsoleInputHistory inputHistory = new ConsoleInputHistory(inputHistoryCapacity); 
 
         void Awake()
         {
-            inputHistory = new ConsoleInputHistory(inputHistoryCapacity);
+            /* This instantiation causes a bug when Unity rebuilds the project while in play mode
+               Solution: move it to class level initialization, and make inputHistoryCapacity a const */
+            // inputHistory = new ConsoleInputHistory(inputHistoryCapacity); 
         }
-
 		void OnEnable()
 		{
 			Console.OnConsoleLog += ui.AddNewOutputLine;

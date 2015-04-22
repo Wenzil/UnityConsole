@@ -1,19 +1,19 @@
 # UnityConsole
-Welcome to UnityConsole, an easy-to-use developer console for Unity 4.6!
+Welcome to UnityConsole, an easy-to-use developer console for Unity 5!
 
 ![Screenshot](https://dl.dropboxusercontent.com/u/106740647/UnityConsole/Screenshot.jpg)
 
 ## Getting Started
-1. Import the UnityConsole package into your project (or copy the UnityConsole directory into your Assets folder)
+1. Import the UnityConsole package into your project (or clone the UnityConsole repository into your Assets folder)
 2. Add a UI canvas to your scene if you don't already have one (GameObject > UI > Canvas)
-3. Drag-and-Drop the Console prefab onto the Canvas in the Hierarchy
-4. Run your scene and press TAB to toggle the Console
+3. Drag-and-Drop the Console prefab onto the canvas in the Hierarchy
+4. Run your scene and press TAB to toggle the console
 
 ## Logging
-Anywhere in your code, simply use ```Console.Log()``` to output to the Console
+Anywhere in your code, simply use ``Console.Log()`` to output to the console
 
 ## Registering Commands
-Use the ```ConsoleCommandsDatabase.RegisterCommand()``` method to register your own commands. Here's an example.
+Use the ``ConsoleCommandsDatabase.RegisterCommand()`` method to register your own commands. Here's an example.
 
 ```csharp
 public class CustomCommands : MonoBehaviour
@@ -43,18 +43,15 @@ public class CustomCommands : MonoBehaviour
 ```
 
 ## World space UI
-You can use UnityConsole in world space too! Simply set your Canvas Render Mode to World Space and you're good to go. You may need to scale down the Canvas.
+You can use UnityConsole in world space too! Simply set your canvas Render Mode to World Space and you're good to go. You may need to scale down the canvas.
 
 ## Skinning
-You can easily change the appearance of the Console by changing the image sources, font styles and state transitions of the various UI components. It is also possible to anchor the Console to any side of the screen.
+You can easily change the appearance of the console by changing the image sources, font styles and state transitions of the various UI components. It is also possible to anchor the console to any side of the screen.
 
-## Known Issues
-- The input field sometimes randomly loses focus
-- The console output text overflows its rectangle when viewed from behind in World Space render mode
-- Modifying Time.timeScale will mess up input field reactivation when submitting a command or reopening the console. See [this hack](http://www.reddit.com/r/Unity3D/comments/2f8y2e/easytouse_developer_console_built_with_the_new_ui/ck7qmkr) for a temporary fix. 
+## Contributing
 
-## Get in touch
+Feel free to create pull requests or report any issues you may find. I'll be taking your feedback!
 
-Feel free to report any issues you may find right here on Github!
+## Contact me
 
 @Syncopath1 on Twitter

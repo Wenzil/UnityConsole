@@ -17,122 +17,137 @@ namespace Wenzil.Console
 		public event Action<string> onSubmitCommand;
 		public event Action onClearConsole;
 
-		public bool isConsoleOpen { get; private set; }
-
 		public Scrollbar scrollbar;
 		public Text outputText;
+        public ScrollRect outputArea;
 		public InputField inputField;
-		public CanvasGroup togglableContent;
 
-		[SerializeField, Range(0f, 1f)]
-		private float onAlpha = 0.75f;
+        /// <summary>
+        /// Indicates whether the console is currently open or close.
+        /// </summary>
+        public bool isConsoleOpen { get { return enabled; } }
 
-		void Awake()
-		{
-			if (!enabled)
-				CloseConsole();
-		}
+        void Awake()
+        {
+            Show(false);
+        }
 
-		void OnEnable()
-		{
-			inputField.onSubmit.AddListener(OnSubmit);
-			OpenConsole();
-		}
+        /// <summary>
+        /// Opens or closes the console.
+        /// </summary>
+        public void ToggleConsole()
+        {
+            enabled = !enabled;
+        }
 
-		void OnDisable()
-		{
-			inputField.onSubmit.RemoveListener(OnSubmit);
-			CloseConsole();
-		}
+        /// <summary>
+        /// Opens the console.
+        /// </summary>
+        public void OpenConsole()
+        {
+            enabled = true;
+        }
 
-		public void OnSubmit(string input)
-		{
-			if (input.Length > 0)
-			{
-				if (onSubmitCommand != null)
-					onSubmitCommand(input);
-				scrollbar.value = 0;
-				ClearInput();
-			}
-		
-			// have to delay, otherwise the enter key writes a newline into the freshly cleared input field
-			this.Invoke(ActivateInputField, 0.1f);
-		}
-	
-		public void OnScroll(PointerEventData eventData)
-		{
-			scrollbar.value += eventData.scrollDelta.y;
-		}
+        /// <summary>
+        /// Closes the console.
+        /// </summary>
+        public void CloseConsole()
+        {
+            enabled = false;
+        }
 
-		public void OpenConsole()
-		{
-			ToggleConsole(true);
-		}
+        void OnEnable()
+        {
+            OnToggle(true);
+        }
 
-		public void CloseConsole()
-		{
-			ToggleConsole(false);
-		}
+        void OnDisable()
+        {
+            OnToggle(false);
+        }
 
-		public void ToggleConsole()
-		{
-			ToggleConsole(!isConsoleOpen);
-		}
+        private void OnToggle(bool open)
+        {
+            Show(open);
 
-		public void ToggleConsole(bool open)
-		{
-			isConsoleOpen = open;
-			enabled = open;
-			togglableContent.interactable = open;
-            togglableContent.blocksRaycasts = open;
-			togglableContent.alpha = open ? onAlpha : 0f;
+            if (open)
+                inputField.ActivateInputField();
+            else
+                ClearInput();
 
-			ClearInput();
-			if(open)
-				this.Invoke(ActivateInputField, 0.1f); // have to delay, otherwise the toggle key is written into the input field
-			else
-				DeactivateInputField();
+            if (onToggleConsole != null)
+                onToggleConsole(open);
+        }
 
-			if(onToggleConsole != null)
-				onToggleConsole(open);
-		}
+        private void Show(bool show)
+        {
+            inputField.gameObject.SetActive(show);
+            outputArea.gameObject.SetActive(show);
+            scrollbar.gameObject.SetActive(show);
+        }
 
+        /// <summary>
+        /// What to do when the user wants to submit a command.
+        /// </summary>
+        public void OnSubmit(string input)
+        {
+            if (EventSystem.current.alreadySelecting) // if user selected something else, don't treat as a submit
+                return;
+
+            if (input.Length > 0)
+            {
+                if (onSubmitCommand != null)
+                    onSubmitCommand(input);
+                scrollbar.value = 0;
+                ClearInput();
+            }
+
+            inputField.ActivateInputField();
+        }
+
+        /// <summary>
+        /// What to do when the user uses the scrollwheel while hovering the console input.
+        /// </summary>
+        public void OnScroll(PointerEventData eventData)
+        {
+            scrollbar.value += 0.08f * eventData.scrollDelta.y;
+        }
+
+        /// <summary>
+        /// Displays the given message as a new entry in the console output.
+        /// </summary>
 		public void AddNewOutputLine(string line)
 		{
 			outputText.text += Environment.NewLine + line;
 		}
 
+        /// <summary>
+        /// Clears the console output.
+        /// </summary>
 		public void ClearOutput()
 		{
 			outputText.text = "";
+            outputText.SetLayoutDirty();
 			if(onClearConsole != null)
 				onClearConsole();
 		}
 
+        /// <summary>
+        /// Clears the console input.
+        /// </summary>
 		public void ClearInput()
 		{
 			SetInputText("");
 		}
 
+        /// <summary>
+        /// Writes the given string into the console input, ready to be user submitted.
+        /// </summary>
 		public void SetInputText(string input) 
         {
             inputField.MoveTextStart(false);
-			inputField.value = input;
+			inputField.text = input;
             inputField.MoveTextEnd(false);
-		}
-
-		public void ActivateInputField()
-		{
-			EventSystem.current.SetSelectedGameObject(scrollbar.gameObject); // selecting the scrollbar seems to enable scrolling
-			EventSystem.current.SetSelectedGameObject(inputField.gameObject);
-
-            inputField.ActivateInputField();
-		}
-
-		public void DeactivateInputField()
-		{
-            if (EventSystem.current != null) // necessary when console is being destroyed as a result of app shutdown
-                EventSystem.current.SetSelectedGameObject(null, null);
 		}
 	}
 }
