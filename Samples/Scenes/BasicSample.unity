@@ -370,14 +370,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1640871671}
     m_Modifications:
-    - target: {fileID: 22400010, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22400010, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 22400006, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -454,9 +446,13 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 22400010, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400010, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 312abd0527754e047a6bfbc424f09ace, type: 2}
@@ -1014,10 +1010,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1640871671}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -107}
-  m_SizeDelta: {x: -64, y: 150}
+  m_AnchoredPosition: {x: 0, y: 99.999939}
+  m_SizeDelta: {x: -64, y: -264}
   m_Pivot: {x: .5, y: .500000238}
 --- !u!114 &2125372160
 MonoBehaviour:
@@ -1044,9 +1040,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: 'Press TAB to toggle the console.
+  m_Text: 'Press <color=#FF6F52><b>TAB</b></color> to toggle the console.
 
-    Anywhere in your code, use Console.Log() to log messages.'
+    Type <color=#FF6F52><b>HELP</b></color> to see the list of available commands.
+
+    <color=black><b>Anywhere in your code, use <color=#FF6F52>Console.Log()</color>
+    to log messages.</b></color>'
 --- !u!222 &2125372161
 CanvasRenderer:
   m_ObjectHideFlags: 0

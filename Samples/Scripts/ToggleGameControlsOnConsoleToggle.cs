@@ -2,7 +2,7 @@
 using Wenzil.Console;
 
 /// <summary>
-/// A special utility class that revokes user controls whenever the Console is open. Very game-specific.
+/// A special utility class that revokes user controls whenever the console is open. Very game-specific.
 /// </summary>
 public class ToggleGameControlsOnConsoleToggle : MonoBehaviour
 {

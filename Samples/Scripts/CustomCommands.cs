@@ -1,31 +1,17 @@
 ﻿using UnityEngine;
 using System;
 using Wenzil.Console;
+using Wenzil.Console.Commands;
 
 /// <summary>
-/// A few custom commands being registered with the Console. Only need to do this once per game session.
+/// Two custom commands being registered with the console. Registered commands persist between scenes but don't persist between multiple application executions.
 /// </summary>
 public class CustomCommands : MonoBehaviour
 {
     void Start()
     {
-        ConsoleCommandsDatabase.RegisterCommand("QUIT", "Quits the application.", "QUIT", CustomCommands.Quit);
-        ConsoleCommandsDatabase.RegisterCommand("SPAWN", "Spawn a new game object from the given name and primitve type in front of the main camera. See PrimitiveType.", "SPAWN [name] [primitiveType]", CustomCommands.Spawn);
-        ConsoleCommandsDatabase.RegisterCommand("HELP", "Displays help information for the given command.", "HELP [command]", CustomCommands.Help);
-    }
-
-    /// <summary>
-    /// Quit the application.
-    /// </summary>
-    private static string Quit(params string[] args)
-    {
-        Application.Quit();
-#if UNITY_EDITOR
-        if (Application.isEditor)
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-
-        return "Quitting...";
+        ConsoleCommandsDatabase.RegisterCommand("SPAWN", "Spawn a new game object from the given name and primitve type in front of the main camera. See PrimitiveType.", "SPAWN name primitiveType", Spawn);
+        ConsoleCommandsDatabase.RegisterCommand("DESTROY", "Destroy the specified game object by name.", "DESTROY gameobject", Destroy);
     }
 
     /// <summary>
@@ -39,7 +25,7 @@ public class CustomCommands : MonoBehaviour
         
         if(args.Length < 2)
         {
-            return Help("SPAWN");
+            return HelpCommand.Execute("SPAWN");
         }
         else
         {
@@ -56,25 +42,33 @@ public class CustomCommands : MonoBehaviour
             spawned = GameObject.CreatePrimitive(primitiveType);
             spawned.name = name;
             spawned.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
-            return "Spawned a new " + primitiveType + " named: " + name;
+            return "Spawned a new " + primitiveType + " named " + name + ".";
         }
     }
 
     /// <summary>
-    /// (Advanced) Displays help information for the given command.
+    /// Destroy the specified game object by name.
     /// </summary>
-    private static string Help(params string[] args)
+    private static string Destroy(params string[] args)
     {
-        // if we got it wrong, get help about the HELP command
         if (args.Length == 0)
-            return Help("HELP");
-
-        // if we got it right, get help about the given command
-        string commandToGetHelpAbout = args[0].ToUpper();
-        ConsoleCommand found;
-        if(ConsoleCommandsDatabase.TryGetCommand(commandToGetHelpAbout, out found))
-            return string.Format("Help information about {0}\n\r\tDescription: {1}\n\r\tUsage: {2}", commandToGetHelpAbout, found.description, found.usage);
+        {
+            return HelpCommand.Execute("DESTROY");
+        }
         else
-            return string.Format("Cannot find help information about {0}. Are you sure it is a valid command?", commandToGetHelpAbout);
+        {
+            string name = args[0];
+            GameObject gameobject = GameObject.Find(name);
+            
+            if (gameobject != null)
+            {
+                GameObject.Destroy(gameobject);
+                return "Destroyed game object " + name + ".";
+            }
+            else
+            {
+                return "No game object named " + name + ".";
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Wenzil.Console
 {
 
     /// <summary>
-    /// The interactive front-end of the Console.
+    /// The interactive front-end of the console.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ConsoleController))]

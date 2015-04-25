@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Wenzil.Console
 {
     /// <summary>
-    /// The behavior of the Console.
+    /// The behavior of the console.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ConsoleController))]

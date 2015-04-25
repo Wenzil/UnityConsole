@@ -1135,7 +1135,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1915241394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: .330000013}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 702712916}
@@ -1171,7 +1171,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
   m_Text: To work in world space, simply place the console in a world space canvas.
-    If you use mouse look, you might want to lock the cursor.
+    If you use mouse look, you might want to lock the cursor. See <color=#FF6F52><b>LockedCursor.cs</b></color>.
 --- !u!222 &1915241397
 CanvasRenderer:
   m_ObjectHideFlags: 0
