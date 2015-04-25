@@ -2,9 +2,9 @@
 
 ## Change list
 - Include 3 built-in commands
-    * HELP - Display the list of available commands or details about a specific command.
-    * LOAD - Load the specified scene by name. Before you can load a scene you have to add it to the list of levels used in the game. Use File->Build Settings... in Unity and add the levels you need to the level list there.
-    * QUIT - Quit the application.
+    * ``HELP`` - Display the list of available commands or details about a specific command.
+    * ``LOAD`` - Load the specified scene by name. Before you can load a scene you have to add it to the list of levels used in the game. Use File->Build Settings... in Unity and add the levels you need to the level list there.
+    * ``QUIT`` - Quit the application.
 - Allow the overwriting of an existing command by simply registering a new command with the same name
 - Add optional parameters ``description`` and ``usage`` to the simpler overload of ``ConsoleCommandsDatabase.RegisterCommand()``
 - Improve the explanatory text in the sample scenes

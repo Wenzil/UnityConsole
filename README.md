@@ -14,9 +14,10 @@ Anywhere in your code, simply use ``Console.Log()`` to output to the console
 
 ## Default Commands
 The console comes with three commands by default.
-    * HELP - Display the list of available commands or details about a specific command.
-    * LOAD - Load the specified scene by name. Before you can load a scene you have to add it to the list of levels used in the game. Use File->Build Settings... in Unity and add the levels you need to the level list there.
-    * QUIT - Quit the application.
+
+* ``HELP`` - Display the list of available commands or details about a specific command.
+* ``LOAD`` - Load the specified scene by name. Before you can load a scene you have to add it to the list of levels used in the game. Use File->Build Settings... in Unity and add the levels you need to the level list there.
+* ``QUIT`` - Quit the application.
 
 ## Extending the Console
 Use the ``ConsoleCommandsDatabase.RegisterCommand()`` method to register your own commands. Here's an example.
@@ -26,8 +27,13 @@ public class MyCommands : MonoBehaviour
 {
     void Start()
     {
-        ConsoleCommandsDatabase.RegisterCommand("TAKE", MyCommands.Take, description: "Partake in a great adventure alone.", usage: "TAKE");
-        ConsoleCommandsDatabase.RegisterCommand("RANDOM", MyCommands.Random, description: "Display a random number between a and b using an optional seed.", usage: "RANDOM a b [seed]");
+        ConsoleCommandsDatabase.RegisterCommand("TAKE", MyCommands.Take,
+            description: "Partake in a great adventure alone.",
+            usage: "TAKE");
+            
+        ConsoleCommandsDatabase.RegisterCommand("RANDOM", MyCommands.Random,
+            description: "Display a random number between a and b using an optional seed.",
+            usage: "RANDOM a b [seed]");
     }
 
     private static string Take(params string[] args)
@@ -41,7 +47,7 @@ public class MyCommands : MonoBehaviour
         {
             return "Missing range bounds.";
         }
-        
+
         if (args.Length >= 3)
         {
             int seed = 0;
@@ -58,7 +64,7 @@ public class MyCommands : MonoBehaviour
         float a = 0;
         float b = 0;
         if (float.TryParse(args[0], out a) &&
-            float.TryParse(args[1], out b) && 
+            float.TryParse(args[1], out b) &&
             a <= b)
         {
             return Convert.ToString(UnityEngine.Random.Range(a, b));
